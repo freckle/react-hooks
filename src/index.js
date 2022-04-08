@@ -2,4 +2,4 @@
 
 const helloWord = (): string => "Hello, World!";
 
-export { helloWord };
+export {helloWord};
