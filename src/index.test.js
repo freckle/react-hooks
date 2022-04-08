@@ -1,3 +1,5 @@
+// @flow
+
 import { helloWord } from ".";
 
 describe("helloWord", () => {
