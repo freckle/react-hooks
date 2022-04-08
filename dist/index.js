@@ -10,3 +10,12 @@ var helloWord = function helloWord() {
 };
 
 exports.helloWord = helloWord;
+"use strict";
+
+var _ = require(".");
+
+describe("helloWord", function () {
+  test("is hello world", function () {
+    expect((0, _.helloWord)()).toBe("Hello, World!");
+  });
+});
