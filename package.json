@@ -11,7 +11,8 @@
   },
   "babel": {
     "presets": [
-      "@babel/preset-env"
+      "@babel/preset-env",
+      "@babel/preset-flow"
     ]
   },
   "repository": "git@github.com:freckle/react-hooks.git",
@@ -22,6 +23,8 @@
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
+    "@babel/preset-flow": "^7.16.7",
+    "flow-bin": "^0.175.1",
     "jest": "^27.5.1",
     "watch": "^1.0.2"
   }

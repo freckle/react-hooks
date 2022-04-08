@@ -1,3 +1,5 @@
-const helloWord = () => "Hello, World!";
+// @flow
+
+const helloWord = (): string => "Hello, World!";
 
 export { helloWord };
