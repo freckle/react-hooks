@@ -1,5 +1,7 @@
-// @flow
-
-const helloWord = (): string => "Hello, World!";
-
-export { helloWord };
+export {
+  unCallbackFn,
+  unsafeMkCallbackFn,
+  useExtraDeps,
+  idExtraDep,
+  isEqualExtraDep,
+} from "./use-extra-deps";
