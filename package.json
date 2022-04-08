@@ -4,10 +4,13 @@
   "description": "React hooks used at Freckle",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel src -o dist/index.js"
+    "build": "babel src -o dist/index.js",
+    "dev": "watch 'yarn run build' src"
   },
   "babel": {
-    "presets": ["@babel/preset-env"]
+    "presets": [
+      "@babel/preset-env"
+    ]
   },
   "repository": "git@github.com:freckle/react-hooks.git",
   "author": "Freckle",
@@ -16,6 +19,7 @@
   "devDependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.9",
-    "@babel/preset-env": "^7.16.11"
+    "@babel/preset-env": "^7.16.11",
+    "watch": "^1.0.2"
   }
 }
