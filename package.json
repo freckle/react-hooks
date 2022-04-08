@@ -8,7 +8,8 @@
     "dev": "watch 'yarn run build' src",
     "test": "jest",
     "test:watch": "yarn run test -- --watch",
-    "check-git-clean": "./check-git-clean.sh"
+    "check-git-clean": "./check-git-clean.sh",
+    "gen-flow": "yarn run flow-copy-source --ignore '**/*.test.js' src dist"
   },
   "babel": {
     "presets": [
@@ -38,6 +39,7 @@
     "@babel/preset-flow": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
     "flow-bin": "^0.175.1",
+    "flow-copy-source": "^2.0.9",
     "flow-typed": "^3.7.0",
     "jest": "^27.5.1",
     "watch": "^1.0.2"
