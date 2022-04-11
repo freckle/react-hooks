@@ -1,7 +1,9 @@
+// @flow
+
+export type { PrimitiveDep, CallbackFn, ExtraDeps } from "./use-extra-deps";
+
 export {
   unCallbackFn,
   unsafeMkCallbackFn,
   useExtraDeps,
-  idExtraDep,
-  isEqualExtraDep,
 } from "./use-extra-deps";

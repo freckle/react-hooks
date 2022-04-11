@@ -7,7 +7,7 @@ var _typeof = require("@babel/runtime/helpers/typeof");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.unCallbackFn = exports.isEqualExtraDep = exports.idExtraDep = void 0;
+exports.unCallbackFn = void 0;
 exports.unsafeMkCallbackFn = unsafeMkCallbackFn;
 exports.useExtraDeps = useExtraDeps;
 
@@ -50,18 +50,18 @@ function unsafeMkCallbackFn(f) {
   return f;
 }
 
-// Hook used to help avoid pitfalls surrounding misuse of objects and arrays in the deps of
-// `useEffect` et. al.
+// Hook used to help avoid pitfalls surrounding misuse of objects and arrays in
+// the deps of `useEffect` et. al.
 //
-// By only allowing `PrimitiveDep`s in the `deps` array and forcing functions and non-primitives
-// through `extraDeps`, we can ensure that we are not doing naive reference equality like React
-// does for the `deps` array.
+// By only allowing `PrimitiveDep`s in the `deps` array and forcing functions
+// and non-primitives through `extraDeps`, we can ensure that we are not doing
+// naive reference equality like React does for the `deps` array.
 //
 // See `useSafeEffect` for usage of this hook
 //
-// Returns an object based upon deps and extraDeps:
-// { allDeps: An array that is suitable to use as a deps array for things like `useEffect`
-// , extraDepValues: An object that has the same keys as extraDeps but contains their plain values
+// Returns an object based upon deps and extraDeps: { allDeps: An array that is
+// suitable to use as a deps array for things like `useEffect` , extraDepValues:
+// An object that has the same keys as extraDeps but contains their plain values
 // }
 //
 function useExtraDeps(deps, extraDeps) {
@@ -101,25 +101,3 @@ function useExtraDeps(deps, extraDeps) {
     })), fns)
   };
 }
-
-var idExtraDep = function idExtraDep(value) {
-  return {
-    value: value,
-    comparator: function comparator(a, b) {
-      return a.id === b.id;
-    }
-  };
-};
-
-exports.idExtraDep = idExtraDep;
-
-var isEqualExtraDep = function isEqualExtraDep(value) {
-  return {
-    value: value,
-    comparator: function comparator(a, b) {
-      return (0, _isEqual["default"])(a, b);
-    }
-  };
-};
-
-exports.isEqualExtraDep = isEqualExtraDep;
