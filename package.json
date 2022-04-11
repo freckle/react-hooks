@@ -1,0 +1,53 @@
+{
+  "name": "@freckle/react-hooks",
+  "version": "1.0.0",
+  "description": "React hooks used at Freckle",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel src -d dist/ --ignore \"src/**/*.test.js\"",
+    "dev": "watch 'yarn run build' src",
+    "test": "jest",
+    "test:watch": "yarn run test -- --watch",
+    "check-git-clean": "./check-git-clean.sh",
+    "gen-flow": "yarn run flow-copy-source --ignore '**/*.test.js' src dist"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-flow",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
+  "repository": "git@github.com:freckle/react-hooks.git",
+  "author": "Freckle",
+  "license": "MIT",
+  "private": true,
+  "peerDependencies": {
+    "react": ">= 16.8.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-flow": "^7.16.7",
+    "@babel/preset-react": "^7.16.7",
+    "flow-copy-source": "^2.0.9",
+    "flow-typed": "^3.7.0",
+    "jest": "^27.5.1",
+    "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.17.9",
+    "flow-bin": "0.110.0",
+    "invariant": "^2.2.4",
+    "react": "16.14.0",
+    "react-dom": "16.14.0"
+  }
+}
