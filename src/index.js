@@ -8,6 +8,8 @@ export { useSafeEffect, useSafeEffectExtraDeps } from "./use-safe-effect";
 
 export { useSafeCallback, useSafeCallbackExtraDeps } from "./use-safe-callback";
 
+export { usePrevious } from "./use-previous";
+
 export {
   unCallbackFn,
   unsafeMkCallbackFn,
