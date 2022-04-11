@@ -7,3 +7,5 @@ export {
   unsafeMkCallbackFn,
   useExtraDeps,
 } from "./use-extra-deps";
+
+export { useSafeCallback, useSafeCallbackExtraDeps } from "./use-safe-callback";

@@ -21,5 +21,19 @@ Object.defineProperty(exports, "useExtraDeps", {
     return _useExtraDeps.useExtraDeps;
   }
 });
+Object.defineProperty(exports, "useSafeCallback", {
+  enumerable: true,
+  get: function get() {
+    return _useSafeCallback.useSafeCallback;
+  }
+});
+Object.defineProperty(exports, "useSafeCallbackExtraDeps", {
+  enumerable: true,
+  get: function get() {
+    return _useSafeCallback.useSafeCallbackExtraDeps;
+  }
+});
 
 var _useExtraDeps = require("./use-extra-deps");
+
+var _useSafeCallback = require("./use-safe-callback");
