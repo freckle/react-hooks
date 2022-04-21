@@ -19,6 +19,38 @@ This package provides (in no particular order) the following React hooks:
 
 ## Usage
 
+Example usage of an object as a dependency:
+
+```js
+import { useSafeEffectExtraDeps } from "@freckle/react-hooks";
+import { useSelector, useDispatch } from "react-redux";
+
+export function StoreContainer(props: { color: Color }): React.Node {
+  const dispatch = useDispatch();
+
+  const { isLoading, itemsData, error } = useSelector(
+    (state) => state.storeReducer
+  );
+
+  useSafeEffectExtraDeps(
+    ({ color }) => {
+      dispatch(loadItems(color));
+    },
+    [dispatch],
+    {
+      color: {
+        value: props.color,
+        comparator: (color1, color2) => color1.id === color2.id,
+      },
+    }
+  );
+
+  return <PiggyStore items={itemsData || []} error={error} />;
+}
+```
+
+For simpler use cases, we can avoid the `extraDeps` bit:
+
 ```js
 import {useSafeEffect} from '@freckle/react-hooks'
 import {useSelector, useDispatch} from 'react-redux'
