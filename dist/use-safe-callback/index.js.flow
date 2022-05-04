@@ -1,0 +1,47 @@
+//@flow
+// see https://gist.github.com/thecotne/6e5969f4aaf8f253985ed36b30ac9fe0
+type $FlowGen$If<X: boolean, Then, Else = empty> = $Call<
+  ((true, Then, Else) => Then) & ((false, Then, Else) => Else),
+  X,
+  Then,
+  Else
+>;
+
+type $FlowGen$Assignable<A, B> = $Call<
+  ((...r: [B]) => true) & ((...r: [A]) => false),
+  A
+>;
+
+import {
+  type,
+  PrimitiveDep,
+  type,
+  ExtraDeps,
+  type,
+  CallbackFn,
+} from "./../use-extra-deps";
+declare type $ObjMap<T: { ... }, F: (v: any) => any> = $ObjMapi<
+  T,
+  <K>(
+    K
+  ) => $FlowGen$If<
+    $FlowGen$Assignable<F, (v: $ElementType<T, K>) => R>,
+    R,
+    empty
+  >
+>;
+declare export function useSafeCallback<F: () => any>(
+  f: () => F,
+  deps: $ReadOnlyArray<PrimitiveDep>
+): CallbackFn<F>;
+declare export function useSafeCallbackExtraDeps<
+  F: () => any,
+  S: {
+    [key: string]: any,
+    ...
+  }
+>(
+  f: (a: $ObjMap<S, <V>(a: ExtraDeps<V>) => V>) => F,
+  deps: $ReadOnlyArray<PrimitiveDep>,
+  extraDeps: S
+): CallbackFn<F>;

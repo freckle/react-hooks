@@ -1,61 +1,15 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-Object.defineProperty(exports, "unCallbackFn", {
-  enumerable: true,
-  get: function get() {
-    return _useExtraDeps.unCallbackFn;
-  }
-});
-Object.defineProperty(exports, "unsafeMkCallbackFn", {
-  enumerable: true,
-  get: function get() {
-    return _useExtraDeps.unsafeMkCallbackFn;
-  }
-});
-Object.defineProperty(exports, "useExtraDeps", {
-  enumerable: true,
-  get: function get() {
-    return _useExtraDeps.useExtraDeps;
-  }
-});
-Object.defineProperty(exports, "usePrevious", {
-  enumerable: true,
-  get: function get() {
-    return _usePrevious.usePrevious;
-  }
-});
-Object.defineProperty(exports, "useSafeCallback", {
-  enumerable: true,
-  get: function get() {
-    return _useSafeCallback.useSafeCallback;
-  }
-});
-Object.defineProperty(exports, "useSafeCallbackExtraDeps", {
-  enumerable: true,
-  get: function get() {
-    return _useSafeCallback.useSafeCallbackExtraDeps;
-  }
-});
-Object.defineProperty(exports, "useSafeEffect", {
-  enumerable: true,
-  get: function get() {
-    return _useSafeEffect.useSafeEffect;
-  }
-});
-Object.defineProperty(exports, "useSafeEffectExtraDeps", {
-  enumerable: true,
-  get: function get() {
-    return _useSafeEffect.useSafeEffectExtraDeps;
-  }
-});
-
-var _useSafeEffect = require("./use-safe-effect");
-
-var _useSafeCallback = require("./use-safe-callback");
-
-var _usePrevious = require("./use-previous");
-
-var _useExtraDeps = require("./use-extra-deps");
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useExtraDeps = exports.unsafeMkCallbackFn = exports.unCallbackFn = exports.usePrevious = exports.useSafeCallbackExtraDeps = exports.useSafeCallback = exports.useSafeEffectExtraDeps = exports.useSafeEffect = void 0;
+var use_safe_effect_1 = require("./use-safe-effect");
+Object.defineProperty(exports, "useSafeEffect", { enumerable: true, get: function () { return use_safe_effect_1.useSafeEffect; } });
+Object.defineProperty(exports, "useSafeEffectExtraDeps", { enumerable: true, get: function () { return use_safe_effect_1.useSafeEffectExtraDeps; } });
+var use_safe_callback_1 = require("./use-safe-callback");
+Object.defineProperty(exports, "useSafeCallback", { enumerable: true, get: function () { return use_safe_callback_1.useSafeCallback; } });
+Object.defineProperty(exports, "useSafeCallbackExtraDeps", { enumerable: true, get: function () { return use_safe_callback_1.useSafeCallbackExtraDeps; } });
+var use_previous_1 = require("./use-previous");
+Object.defineProperty(exports, "usePrevious", { enumerable: true, get: function () { return use_previous_1.usePrevious; } });
+var use_extra_deps_1 = require("./use-extra-deps");
+Object.defineProperty(exports, "unCallbackFn", { enumerable: true, get: function () { return use_extra_deps_1.unCallbackFn; } });
+Object.defineProperty(exports, "unsafeMkCallbackFn", { enumerable: true, get: function () { return use_extra_deps_1.unsafeMkCallbackFn; } });
+Object.defineProperty(exports, "useExtraDeps", { enumerable: true, get: function () { return use_extra_deps_1.useExtraDeps; } });

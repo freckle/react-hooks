@@ -1,10 +1,9 @@
-import * as React from 'react'
-import pickBy from 'lodash/pickBy'
-import omitBy from 'lodash/omitBy'
 import isFunction from 'lodash/isFunction'
 import mapValues from 'lodash/mapValues'
+import omitBy from 'lodash/omitBy'
+import pickBy from 'lodash/pickBy'
 import values from 'lodash/values'
-import isEqual from 'lodash/isEqual'
+import * as React from 'react'
 
 type $ObjMap<T extends {}, F extends (v: any) => any> = {
   [K in keyof T]: F extends (v: T[K]) => infer R ? R : never
@@ -15,7 +14,7 @@ export type PrimitiveDep = boolean | string | number | null | void | Symbol
 
 // Wrapper around a function that has been wrapped in `useSafeCallback`. This
 // type is here to avoid cyclical dependencies.
-export type CallbackFn = F
+export type CallbackFn<F> = F
 
 export const unCallbackFn = <F>(fn: CallbackFn<F>): F => fn
 
@@ -57,10 +56,10 @@ export function useExtraDeps<
   extraDepValues: $ObjMap<S, <V>(a: ExtraDeps<V>) => V>
 } {
   const [run, setRun] = React.useState<Symbol>(Symbol())
-  const nonFnsRef = React.useRef(null)
+  const nonFnsRef = React.useRef<null | any>(null)
 
-  const fns = pickBy(extraDeps, isFunction)
-  const nonFns = omitBy(extraDeps, isFunction)
+  const fns: any = pickBy(extraDeps, isFunction)
+  const nonFns: any = omitBy(extraDeps, isFunction)
 
   const hasChange = () => {
     if (nonFnsRef.current === null || nonFnsRef.current === undefined) {
