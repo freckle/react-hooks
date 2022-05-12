@@ -15,7 +15,7 @@ export type PrimitiveDep = boolean | string | number | null | void | Symbol;
 
 // Wrapper around a function that has been wrapped in `useSafeCallback`. This
 // type is here to avoid cyclical dependencies.
-export type CallbackFn = F;
+export type CallbackFn<F> = F;
 
 export const unCallbackFn = <F>(fn: CallbackFn<F>): F => fn;
 

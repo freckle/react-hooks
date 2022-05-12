@@ -20,11 +20,13 @@
   "license": "MIT",
   "private": true,
   "peerDependencies": {
+    "react-dom": ">= 16.8.0",
     "react": ">= 16.8.0"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "@types/lodash": "^4.14.180",
+    "@types/react": "^18.0.9",
     "flowgen": "^1.17.0",
     "jest": "^27.5.1",
     "prettier": "^2.5.1",
@@ -32,9 +34,9 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
     "invariant": "^2.2.4",
-    "react": "16.14.0",
+    "lodash": "^4.17.21",
+    "react": ">= 16.8.0",
     "react-dom": "16.14.0"
   }
 }
