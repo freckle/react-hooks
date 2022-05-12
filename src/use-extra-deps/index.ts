@@ -1,5 +1,3 @@
-// @flow
-
 import * as React from "react";
 import pickBy from "lodash/pickBy";
 import omitBy from "lodash/omitBy";
@@ -8,24 +6,29 @@ import mapValues from "lodash/mapValues";
 import values from "lodash/values";
 import isEqual from "lodash/isEqual";
 
+type $ObjMap<T extends {}, F extends (v: any) => any> = {
+  [K in keyof T]: F extends (v: T[K]) => infer R ? R : never;
+};
+
 // Dependencies that are safe to use in the normal `useEffect` deps array
 export type PrimitiveDep = boolean | string | number | null | void | Symbol;
 
 // Wrapper around a function that has been wrapped in `useSafeCallback`. This
 // type is here to avoid cyclical dependencies.
-export opaque type CallbackFn<F> = F;
+export type CallbackFn = F;
 
 export const unCallbackFn = <F>(fn: CallbackFn<F>): F => fn;
 
 // Used only by `useSafeCallback`
-export function unsafeMkCallbackFn<F: (...Array<any>) => any>(
-  f: F
-): CallbackFn<F> {
+export function unsafeMkCallbackFn<F extends () => any>(f: F): CallbackFn<F> {
   return f;
 }
 
 export type ExtraDeps<V> =
-  | {| value: V, comparator: (a: V, b: V) => boolean |}
+  | {
+      value: V;
+      comparator: (a: V, b: V) => boolean;
+    }
   | CallbackFn<V>;
 
 // Hook used to help avoid pitfalls surrounding misuse of objects and arrays in
@@ -42,13 +45,17 @@ export type ExtraDeps<V> =
 // An object that has the same keys as extraDeps but contains their plain values
 // }
 //
-export function useExtraDeps<S: { [key: string]: any }>(
-  deps: $ReadOnlyArray<PrimitiveDep>,
+export function useExtraDeps<
+  S extends {
+    [key: string]: any;
+  }
+>(
+  deps: ReadonlyArray<PrimitiveDep>,
   extraDeps: S
-): {|
-  allDeps: $ReadOnlyArray<any>,
-  extraDepValues: $ObjMap<S, <V>(ExtraDeps<V>) => V>,
-|} {
+): {
+  allDeps: ReadonlyArray<any>;
+  extraDepValues: $ObjMap<S, <V>(a: ExtraDeps<V>) => V>;
+} {
   const [run, setRun] = React.useState<Symbol>(Symbol());
   const nonFnsRef = React.useRef(null);
 

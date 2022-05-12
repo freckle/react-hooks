@@ -12,4 +12,4 @@ restylers:
       enabled: false # prefer prettier-json
   - prettier:
       include:
-        - 'src/**/*.js'
+        - 'src/**/*.ts'

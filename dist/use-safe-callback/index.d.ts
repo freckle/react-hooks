@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as React from "react";
 
 import {
@@ -10,20 +8,26 @@ import {
   unsafeMkCallbackFn,
 } from "./../use-extra-deps";
 
-export function useSafeCallback<F: (...Array<any>) => any>(
+type $ObjMap<T extends {}, F extends (v: any) => any> = {
+  [K in keyof T]: F extends (v: T[K]) => infer R ? R : never;
+};
+
+export function useSafeCallback<F extends () => any>(
   f: () => F,
-  deps: $ReadOnlyArray<PrimitiveDep>
+  deps: ReadonlyArray<PrimitiveDep>
 ): CallbackFn<F> {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return useSafeCallbackExtraDeps(() => f(), deps, {});
 }
 
 export function useSafeCallbackExtraDeps<
-  F: (...Array<any>) => any,
-  S: { [key: string]: any }
+  F extends () => any,
+  S extends {
+    [key: string]: any;
+  }
 >(
-  f: ($ObjMap<S, <V>(ExtraDeps<V>) => V>) => F,
-  deps: $ReadOnlyArray<PrimitiveDep>,
+  f: (a: $ObjMap<S, <V>(a: ExtraDeps<V>) => V>) => F,
+  deps: ReadonlyArray<PrimitiveDep>,
   extraDeps: S
 ): CallbackFn<F> {
   const { extraDepValues, allDeps } = useExtraDeps(deps, extraDeps);

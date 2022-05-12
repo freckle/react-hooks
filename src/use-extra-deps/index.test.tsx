@@ -1,5 +1,3 @@
-// @flow
-
 import last from "lodash/last";
 import * as React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
@@ -7,7 +5,7 @@ import { act } from "react-dom/test-utils";
 import invariant from "invariant";
 import { useExtraDeps } from ".";
 
-let container: HTMLElement = (null: any);
+let container: HTMLElement = null as any;
 
 beforeEach(() => {
   container = document.createElement("div");
@@ -18,7 +16,7 @@ beforeEach(() => {
 afterEach(() => {
   unmountComponentAtNode(container);
   container.remove();
-  container = (null: any);
+  container = null as any;
 });
 
 describe("useExtraDeps", () => {

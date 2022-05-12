@@ -1,5 +1,3 @@
-// @flow
-
 export type { MaybeCleanUpFn } from "./types.js";
 
 export type { PrimitiveDep, CallbackFn, ExtraDeps } from "./use-extra-deps";
