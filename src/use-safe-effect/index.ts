@@ -1,11 +1,7 @@
 import * as React from 'react'
+import type { MaybeCleanUpFn } from './../types'
+import { useExtraDeps, type ExtraDeps, type PrimitiveDep } from './../use-extra-deps'
 
-import type {MaybeCleanUpFn} from './../types'
-import {type PrimitiveDep, type ExtraDeps, useExtraDeps} from './../use-extra-deps'
-
-type $ObjMap<T extends {}, F extends (v: any) => any> = {
-  [K in keyof T]: F extends (v: T[K]) => infer R ? R : never
-}
 
 export const useSafeEffect = (effect: () => MaybeCleanUpFn, deps: ReadonlyArray<PrimitiveDep>) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -13,15 +9,16 @@ export const useSafeEffect = (effect: () => MaybeCleanUpFn, deps: ReadonlyArray<
 }
 
 export const useSafeEffectExtraDeps = <
+  T extends {[P in keyof S]: S[P] extends ExtraDeps<infer R> ? R : never},
   S extends {
-    [key: string]: ExtraDeps<any>
-  }
+    [key: string]: ExtraDeps<unknown>
+  } = {}
 >(
-  effect: (a: $ObjMap<S, <V>(a: ExtraDeps<V>) => V>) => MaybeCleanUpFn,
+  effect: (a: T) => MaybeCleanUpFn,
   deps: ReadonlyArray<PrimitiveDep>,
   extraDeps: S
 ) => {
-  const {extraDepValues, allDeps} = useExtraDeps(deps, extraDeps)
+  const {extraDepValues, allDeps} = useExtraDeps<T>(deps, extraDeps)
 
   React.useEffect(
     () => effect(extraDepValues),

@@ -25,7 +25,9 @@ declare type $ObjMap<T: { ... }, F: (v: any) => any> = $ObjMapi<
 export type PrimitiveDep = boolean | string | number | null | void | Symbol;
 export type CallbackFn<F> = F;
 declare export var unCallbackFn: <F>(fn: F) => F;
-declare export function unsafeMkCallbackFn<F: () => any>(f: F): CallbackFn<F>;
+declare export function unsafeMkCallbackFn<F: (v: any) => any>(
+  f: F
+): CallbackFn<F>;
 export type ExtraDeps<V> =
   | {
       value: V,

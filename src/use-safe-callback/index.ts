@@ -1,18 +1,14 @@
 import * as React from 'react'
-
 import {
-  type PrimitiveDep,
-  type ExtraDeps,
-  type CallbackFn,
-  useExtraDeps,
-  unsafeMkCallbackFn
+  unsafeMkCallbackFn, useExtraDeps, type CallbackFn, type ExtraDeps, type PrimitiveDep
 } from './../use-extra-deps'
+
 
 type $ObjMap<T extends {}, F extends (v: any) => any> = {
   [K in keyof T]: F extends (v: T[K]) => infer R ? R : never
 }
 
-export function useSafeCallback<F extends () => any>(
+export function useSafeCallback<F extends (v: any) => any>(
   f: () => F,
   deps: ReadonlyArray<PrimitiveDep>
 ): CallbackFn<F> {
@@ -21,7 +17,7 @@ export function useSafeCallback<F extends () => any>(
 }
 
 export function useSafeCallbackExtraDeps<
-  F extends () => any,
+  F extends (v: any) => any,
   S extends {
     [key: string]: any
   }

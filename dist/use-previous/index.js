@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.usePrevious = void 0;
 const React = __importStar(require("react"));
 const usePrevious = (value) => {
-    const ref = React.useRef(value);
+    const ref = React.useRef();
     React.useEffect(() => {
         ref.current = value;
     });

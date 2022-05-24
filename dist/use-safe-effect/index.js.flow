@@ -13,7 +13,7 @@ type $FlowGen$Assignable<A, B> = $Call<
 >;
 
 import type { MaybeCleanUpFn } from "./../types";
-import { type, PrimitiveDep, type, ExtraDeps } from "./../use-extra-deps";
+import { type, ExtraDeps, type, PrimitiveDep } from "./../use-extra-deps";
 declare type $ObjMap<T: { ... }, F: (v: any) => any> = $ObjMapi<
   T,
   <K>(
@@ -29,8 +29,9 @@ declare export var useSafeEffect: (
   deps: $ReadOnlyArray<PrimitiveDep>
 ) => void;
 declare export var useSafeEffectExtraDeps: <
+  T: $ObjMapi<S, <P>(P) => $ElementType<S, P>>,
   S: {
-    [key: string]: any,
+    [key: string]: mixed,
     ...
   }
 >(

@@ -5,9 +5,6 @@ import pickBy from 'lodash/pickBy'
 import values from 'lodash/values'
 import * as React from 'react'
 
-type $ObjMap<T extends {}, F extends (v: any) => any> = {
-  [K in keyof T]: F extends (v: T[K]) => infer R ? R : never
-}
 
 // Dependencies that are safe to use in the normal `useEffect` deps array
 export type PrimitiveDep = boolean | string | number | null | void | Symbol
@@ -19,7 +16,7 @@ export type CallbackFn<F> = F
 export const unCallbackFn = <F>(fn: CallbackFn<F>): F => fn
 
 // Used only by `useSafeCallback`
-export function unsafeMkCallbackFn<F extends () => any>(f: F): CallbackFn<F> {
+export function unsafeMkCallbackFn<F extends (v: any) => any>(f: F): CallbackFn<F> {
   return f
 }
 
@@ -45,15 +42,16 @@ export type ExtraDeps<V> =
 // }
 //
 export function useExtraDeps<
+  T extends {[P in keyof S]: S[P] extends ExtraDeps<infer R> ? R : never},
   S extends {
-    [key: string]: any
-  }
+    [key: string]: ExtraDeps<unknown>
+  } = {}
 >(
   deps: ReadonlyArray<PrimitiveDep>,
   extraDeps: S
 ): {
   allDeps: ReadonlyArray<any>
-  extraDepValues: $ObjMap<S, <V>(a: ExtraDeps<V>) => V>
+  extraDepValues: T
 } {
   const [run, setRun] = React.useState<Symbol>(Symbol())
   const nonFnsRef = React.useRef<null | any>(null)
