@@ -20,28 +20,28 @@ import {
   type,
   PrimitiveDep,
 } from "./../use-extra-deps";
-declare type $ObjMap<T: { ... }, F: (v: any) => any> = $ObjMapi<
-  T,
-  <K>(
-    K
-  ) => $FlowGen$If<
-    $FlowGen$Assignable<F, (v: $ElementType<T, K>) => R>,
-    R,
-    empty
-  >
->;
 declare export function useSafeCallback<F: (v: any) => any>(
   f: () => F,
   deps: $ReadOnlyArray<PrimitiveDep>
 ): CallbackFn<F>;
 declare export function useSafeCallbackExtraDeps<
   F: (v: any) => any,
+  T: $ObjMapi<
+    S,
+    <P>(
+      P
+    ) => $FlowGen$If<
+      $FlowGen$Assignable<$ElementType<S, P>, ExtraDeps<R>>,
+      R,
+      empty
+    >
+  >,
   S: {
-    [key: string]: any,
+    [key: string]: ExtraDeps<mixed>,
     ...
   }
 >(
-  f: (a: $ObjMap<S, <V>(a: ExtraDeps<V>) => V>) => F,
+  f: (a: T) => F,
   deps: $ReadOnlyArray<PrimitiveDep>,
   extraDeps: S
 ): CallbackFn<F>;

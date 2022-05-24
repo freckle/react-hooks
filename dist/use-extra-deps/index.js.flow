@@ -12,16 +12,6 @@ type $FlowGen$Assignable<A, B> = $Call<
   A
 >;
 
-declare type $ObjMap<T: { ... }, F: (v: any) => any> = $ObjMapi<
-  T,
-  <K>(
-    K
-  ) => $FlowGen$If<
-    $FlowGen$Assignable<F, (v: $ElementType<T, K>) => R>,
-    R,
-    empty
-  >
->;
 export type PrimitiveDep = boolean | string | number | null | void | Symbol;
 export type CallbackFn<F> = F;
 declare export var unCallbackFn: <F>(fn: F) => F;
@@ -36,8 +26,18 @@ export type ExtraDeps<V> =
     }
   | CallbackFn<V>;
 declare export function useExtraDeps<
+  T: $ObjMapi<
+    S,
+    <P>(
+      P
+    ) => $FlowGen$If<
+      $FlowGen$Assignable<$ElementType<S, P>, ExtraDeps<R>>,
+      R,
+      empty
+    >
+  >,
   S: {
-    [key: string]: any,
+    [key: string]: ExtraDeps<mixed>,
     ...
   }
 >(
@@ -45,6 +45,6 @@ declare export function useExtraDeps<
   extraDeps: S
 ): {
   allDeps: $ReadOnlyArray<any>,
-  extraDepValues: $ObjMap<S, <V>(a: ExtraDeps<V>) => V>,
+  extraDepValues: T,
   ...
 };
