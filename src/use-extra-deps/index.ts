@@ -5,7 +5,6 @@ import pickBy from 'lodash/pickBy'
 import values from 'lodash/values'
 import * as React from 'react'
 
-
 // Dependencies that are safe to use in the normal `useEffect` deps array
 export type PrimitiveDep = boolean | string | number | null | void | Symbol
 

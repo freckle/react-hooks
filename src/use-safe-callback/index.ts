@@ -1,9 +1,11 @@
 import * as React from 'react'
 import {
-  unsafeMkCallbackFn, useExtraDeps, type CallbackFn, type ExtraDeps, type PrimitiveDep
+  unsafeMkCallbackFn,
+  useExtraDeps,
+  type CallbackFn,
+  type ExtraDeps,
+  type PrimitiveDep
 } from './../use-extra-deps'
-
-
 
 export function useSafeCallback<F extends (v: any) => any>(
   f: () => F,
@@ -19,11 +21,7 @@ export function useSafeCallbackExtraDeps<
   S extends {
     [key: string]: ExtraDeps<unknown>
   } = {}
->(
-  f: (a: T) => F,
-  deps: ReadonlyArray<PrimitiveDep>,
-  extraDeps: S
-): CallbackFn<F> {
+>(f: (a: T) => F, deps: ReadonlyArray<PrimitiveDep>, extraDeps: S): CallbackFn<F> {
   const {extraDepValues, allDeps} = useExtraDeps<T>(deps, extraDeps)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
