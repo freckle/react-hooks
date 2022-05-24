@@ -1,1 +1,1 @@
-export declare const usePrevious: <T>(value: T) => T;
+export declare const usePrevious: <T>(value: T) => T | null | undefined;
