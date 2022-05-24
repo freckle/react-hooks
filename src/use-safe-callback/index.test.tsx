@@ -1,9 +1,8 @@
-import * as React from 'react'
-import {render, unmountComponentAtNode} from 'react-dom'
-import {act} from 'react-dom/test-utils'
 import invariant from 'invariant'
-
-import {useSafeCallback} from '.'
+import * as React from 'react'
+import { render, unmountComponentAtNode } from 'react-dom'
+import { act } from 'react-dom/test-utils'
+import { useSafeCallback } from '.'
 
 let container: HTMLElement = null as any
 
@@ -22,7 +21,7 @@ afterEach(() => {
 describe('useSafeCallback', () => {
   it('works with dep', async () => {
     let f
-    const A = ({p1}) => {
+    const A = ({p1}:{p1: number}) => {
       f = useSafeCallback(() => () => p1, [p1])
       return null
     }

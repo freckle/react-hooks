@@ -1,8 +1,8 @@
-import * as React from 'react'
-import {render, unmountComponentAtNode} from 'react-dom'
-import {act} from 'react-dom/test-utils'
 import invariant from 'invariant'
-import {usePrevious} from '.'
+import * as React from 'react'
+import { render, unmountComponentAtNode } from 'react-dom'
+import { act } from 'react-dom/test-utils'
+import { usePrevious } from '.'
 
 let container: HTMLElement = null as any
 
@@ -22,10 +22,9 @@ describe('usePrevious', () => {
   it('keeps track of previous value', async () => {
     let previous
 
-    const C = ({p}) => {
+    const C = ({p}: {p: number}) => {
       previous = usePrevious(p)
-
-      return p
+      return <>{p}</>
     }
 
     // first render
