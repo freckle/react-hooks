@@ -54,7 +54,7 @@ describe('useSafeCallbackExtraDeps', () => {
     const A = ({p1}:{p1: boolean[]}) => {
       f = useSafeCallbackExtraDeps(
         ({p1}) => () => {
-          //@ts-ignore
+
           countTrue(p1)
         }, 
         [], 

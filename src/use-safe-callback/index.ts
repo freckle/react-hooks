@@ -4,9 +4,6 @@ import {
 } from './../use-extra-deps'
 
 
-type $ObjMap<T extends {}, F extends (v: any) => any> = {
-  [K in keyof T]: F extends (v: T[K]) => infer R ? R : never
-}
 
 export function useSafeCallback<F extends (v: any) => any>(
   f: () => F,
@@ -18,15 +15,16 @@ export function useSafeCallback<F extends (v: any) => any>(
 
 export function useSafeCallbackExtraDeps<
   F extends (v: any) => any,
+  T extends {[P in keyof S]: S[P] extends ExtraDeps<infer R> ? R : never},
   S extends {
-    [key: string]: any
-  }
+    [key: string]: ExtraDeps<unknown>
+  } = {}
 >(
-  f: (a: $ObjMap<S, <V>(a: ExtraDeps<V>) => V>) => F,
+  f: (a: T) => F,
   deps: ReadonlyArray<PrimitiveDep>,
   extraDeps: S
 ): CallbackFn<F> {
-  const {extraDepValues, allDeps} = useExtraDeps(deps, extraDeps)
+  const {extraDepValues, allDeps} = useExtraDeps<T>(deps, extraDeps)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const cb = React.useCallback(f(extraDepValues), allDeps)
