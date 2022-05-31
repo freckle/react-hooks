@@ -4,13 +4,14 @@
   "description": "React hooks used at Freckle",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc -d && node gen-flow.js",
+    "build": "tsc -d && yarn copy:flow-lib",
     "dev": "watch 'yarn run build' src",
     "test": "jest",
     "test:watch": "yarn run test -- --watch",
     "format": "prettier --write 'src/**/*.ts'",
     "check-git-clean": "./check-git-clean.sh",
-    "gen-flow": "yarn run flow-copy-source --ignore '**/*.test.js' src dist"
+    "gen-flow": "yarn run flow-copy-source --ignore '**/*.test.js' src dist",
+    "copy:flow-lib": "cpy '**/*.flow' ../dist --cwd=flow-lib --parents"
   },
   "babel": {
     "presets": [
@@ -41,6 +42,7 @@
     "@types/lodash": "^4.14.182",
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.5",
+    "cpy-cli": "3.1.1",
     "flow-copy-source": "^2.0.9",
     "flowgen": "^1.19.0",
     "jest": "^27.5.1",
