@@ -1,11 +1,13 @@
 /* @flow */
 
 import * as React from "react";
+
 import type { MaybeCleanUpFn } from "./../types";
 import {
-  type PrimitiveDep
+  type PrimitiveDep,
+  type ExtraDeps,
+  useExtraDeps,
 } from "./../use-extra-deps";
-
 
 export const useSafeEffect = (
   effect: () => MaybeCleanUpFn,

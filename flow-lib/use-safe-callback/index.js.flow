@@ -1,10 +1,14 @@
 /* @flow */
 
 import * as React from "react";
-import {
-  type CallbackFn, type PrimitiveDep
-} from "./../use-extra-deps";
 
+import {
+  type PrimitiveDep,
+  type ExtraDeps,
+  type CallbackFn,
+  useExtraDeps,
+  unsafeMkCallbackFn,
+} from "./../use-extra-deps";
 
 export function useSafeCallback<F: (...Array<any>) => any>(
   f: () => F,

@@ -1,13 +1,17 @@
 // @flow
 
 export type { MaybeCleanUpFn } from "./types.js";
+
+export type { PrimitiveDep, CallbackFn, ExtraDeps } from "./use-extra-deps";
+
+export { useSafeEffect, useSafeEffectExtraDeps } from "./use-safe-effect";
+
+export { useSafeCallback, useSafeCallbackExtraDeps } from "./use-safe-callback";
+
+export { usePrevious } from "./use-previous";
+
 export {
   unCallbackFn,
   unsafeMkCallbackFn,
-  useExtraDeps
+  useExtraDeps,
 } from "./use-extra-deps";
-export type { CallbackFn, ExtraDeps, PrimitiveDep } from "./use-extra-deps";
-export { usePrevious } from "./use-previous";
-export { useSafeCallback, useSafeCallbackExtraDeps } from "./use-safe-callback";
-export { useSafeEffect, useSafeEffectExtraDeps } from "./use-safe-effect";
-
