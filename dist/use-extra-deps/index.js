@@ -1,55 +1,45 @@
 "use strict";
-
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _typeof = require("@babel/runtime/helpers/typeof");
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
 });
-exports.unCallbackFn = void 0;
-exports.unsafeMkCallbackFn = unsafeMkCallbackFn;
-exports.useExtraDeps = useExtraDeps;
-
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
-
-var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
-
-var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
-
-var React = _interopRequireWildcard(require("react"));
-
-var _pickBy = _interopRequireDefault(require("lodash/pickBy"));
-
-var _omitBy = _interopRequireDefault(require("lodash/omitBy"));
-
-var _isFunction = _interopRequireDefault(require("lodash/isFunction"));
-
-var _mapValues = _interopRequireDefault(require("lodash/mapValues"));
-
-var _values = _interopRequireDefault(require("lodash/values"));
-
-var _isEqual = _interopRequireDefault(require("lodash/isEqual"));
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-var unCallbackFn = function unCallbackFn(fn) {
-  return fn;
-}; // Used only by `useSafeCallback`
-
-
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useExtraDeps = exports.unsafeMkCallbackFn = exports.unCallbackFn = void 0;
+const isFunction_1 = __importDefault(require("lodash/isFunction"));
+const mapValues_1 = __importDefault(require("lodash/mapValues"));
+const omitBy_1 = __importDefault(require("lodash/omitBy"));
+const pickBy_1 = __importDefault(require("lodash/pickBy"));
+const values_1 = __importDefault(require("lodash/values"));
+const React = __importStar(require("react"));
+const unCallbackFn = (fn) => fn;
 exports.unCallbackFn = unCallbackFn;
-
+// Used only by `useSafeCallback`
 function unsafeMkCallbackFn(f) {
-  return f;
+    return f;
 }
-
+exports.unsafeMkCallbackFn = unsafeMkCallbackFn;
 // Hook used to help avoid pitfalls surrounding misuse of objects and arrays in
 // the deps of `useEffect` et. al.
 //
@@ -65,39 +55,28 @@ function unsafeMkCallbackFn(f) {
 // }
 //
 function useExtraDeps(deps, extraDeps) {
-  var _React$useState = React.useState(Symbol()),
-      _React$useState2 = (0, _slicedToArray2["default"])(_React$useState, 2),
-      run = _React$useState2[0],
-      setRun = _React$useState2[1];
-
-  var nonFnsRef = React.useRef(null);
-  var fns = (0, _pickBy["default"])(extraDeps, _isFunction["default"]);
-  var nonFns = (0, _omitBy["default"])(extraDeps, _isFunction["default"]);
-
-  var hasChange = function hasChange() {
-    if (nonFnsRef.current === null || nonFnsRef.current === undefined) {
-      return true;
+    const [run, setRun] = React.useState(Symbol());
+    const nonFnsRef = React.useRef(null);
+    const fns = (0, pickBy_1.default)(extraDeps, isFunction_1.default);
+    const nonFns = (0, omitBy_1.default)(extraDeps, isFunction_1.default);
+    const hasChange = () => {
+        if (nonFnsRef.current === null || nonFnsRef.current === undefined) {
+            return true;
+        }
+        for (const key in nonFns) {
+            if (!nonFns[key].comparator(nonFns[key].value, nonFnsRef.current[key].value)) {
+                return true;
+            }
+        }
+        return false;
+    };
+    if (hasChange()) {
+        setRun(Symbol());
+        nonFnsRef.current = nonFns;
     }
-
-    for (var _key in nonFns) {
-      if (!nonFns[_key].comparator(nonFns[_key].value, nonFnsRef.current[_key].value)) {
-        return true;
-      }
-    }
-
-    return false;
-  };
-
-  if (hasChange()) {
-    setRun(Symbol());
-    nonFnsRef.current = nonFns;
-  }
-
-  return {
-    allDeps: [].concat((0, _toConsumableArray2["default"])(deps), (0, _toConsumableArray2["default"])((0, _values["default"])(fns)), [run]),
-    extraDepValues: _objectSpread(_objectSpread({}, (0, _mapValues["default"])(nonFns, function (_ref) {
-      var value = _ref.value;
-      return value;
-    })), fns)
-  };
+    return {
+        allDeps: [...deps, ...(0, values_1.default)(fns), run],
+        extraDepValues: Object.assign(Object.assign({}, (0, mapValues_1.default)(nonFns, ({ value }) => value)), fns)
+    };
 }
+exports.useExtraDeps = useExtraDeps;
