@@ -29,6 +29,15 @@
 	"jest-dom"
   ],
   "rules": {
+	"@typescript-eslint/no-unused-vars": [
+	  "warn",
+	  {
+		"vars": "all",
+		"varsIgnorePattern": "^_",
+		"args": "after-used",
+		"argsIgnorePattern": "^_"
+	  }
+	],
 	"brace-style": ["warn", "1tbs", {"allowSingleLine": true}],
 	"class-methods-use-this": [
 	  "warn",
@@ -67,15 +76,6 @@
 	"no-self-compare": "error",
 	"no-template-curly-in-string": "error",
 	"no-unused-expressions": ["error", {"allowTernary": true}],
-	"no-unused-vars": [
-	  "warn",
-	  {
-		"vars": "all",
-		"varsIgnorePattern": "^_",
-		"args": "after-used",
-		"argsIgnorePattern": "^_"
-	  }
-	],
 	"no-useless-call": "error",
 	"no-useless-concat": "error",
 	"no-useless-constructor": "error",
