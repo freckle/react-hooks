@@ -4,6 +4,7 @@ import {render, unmountComponentAtNode} from 'react-dom'
 import {act} from 'react-dom/test-utils'
 import {usePrevious} from '.'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let container: HTMLElement = null as any
 
 beforeEach(() => {
@@ -15,6 +16,7 @@ beforeEach(() => {
 afterEach(() => {
   unmountComponentAtNode(container)
   container.remove()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   container = null as any
 })
 
