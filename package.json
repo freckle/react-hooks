@@ -8,7 +8,7 @@
     "dev": "watch 'yarn run build' src",
     "test": "jest",
     "test:watch": "yarn run test -- --watch",
-    "format": "prettier --write 'src/**/*.ts'",
+    "format": "prettier --write 'src/**/*.(ts|tsx)'",
     "check-git-clean": "./check-git-clean.sh",
     "gen-flow": "yarn run flow-copy-source --ignore '**/*.test.js' src dist",
     "copy:flow-lib": "cpy '**/*.flow' ../dist --cwd=flow-lib --parents"

@@ -1,8 +1,8 @@
 import invariant from 'invariant'
 import * as React from 'react'
-import { render, unmountComponentAtNode } from 'react-dom'
-import { act } from 'react-dom/test-utils'
-import { useSafeCallback, useSafeCallbackExtraDeps } from '.'
+import {render, unmountComponentAtNode} from 'react-dom'
+import {act} from 'react-dom/test-utils'
+import {useSafeCallback, useSafeCallbackExtraDeps} from '.'
 
 let container: HTMLElement = null as any
 
@@ -21,7 +21,7 @@ afterEach(() => {
 describe('useSafeCallback', () => {
   it('works with dep', async () => {
     let f
-    const A = ({p1}:{p1: number}) => {
+    const A = ({p1}: {p1: number}) => {
       f = useSafeCallback(() => () => p1, [p1])
       return null
     }
@@ -51,16 +51,17 @@ describe('useSafeCallbackExtraDeps', () => {
     const arr1 = [true, false, true]
     const arr2 = [false, true]
     let f
-    const A = ({p1}:{p1: boolean[]}) => {
+    const A = ({p1}: {p1: boolean[]}) => {
       f = useSafeCallbackExtraDeps(
-        ({p1}) => () => {
-
-          countTrue(p1)
-        }, 
-        [], 
+        ({p1}) =>
+          () => {
+            countTrue(p1)
+          },
+        [],
         {
           p1: {value: p1, comparator: (a: boolean[], b: boolean[]) => a.length === b.length}
-        })
+        }
+      )
       return null
     }
     await act(async () => {
