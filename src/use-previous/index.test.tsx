@@ -1,8 +1,8 @@
 import invariant from 'invariant'
 import * as React from 'react'
-import { render, unmountComponentAtNode } from 'react-dom'
-import { act } from 'react-dom/test-utils'
-import { usePrevious } from '.'
+import {render, unmountComponentAtNode} from 'react-dom'
+import {act} from 'react-dom/test-utils'
+import {usePrevious} from '.'
 
 let container: HTMLElement = null as any
 

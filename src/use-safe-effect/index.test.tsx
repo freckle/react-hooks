@@ -1,10 +1,10 @@
 import invariant from 'invariant'
 import isEqual from 'lodash/isEqual'
 import * as React from 'react'
-import { render, unmountComponentAtNode } from 'react-dom'
-import { act } from 'react-dom/test-utils'
-import { useSafeEffect, useSafeEffectExtraDeps } from '.'
-import { useSafeCallback } from './../use-safe-callback'
+import {render, unmountComponentAtNode} from 'react-dom'
+import {act} from 'react-dom/test-utils'
+import {useSafeEffect, useSafeEffectExtraDeps} from '.'
+import {useSafeCallback} from './../use-safe-callback'
 
 let container: HTMLElement = null as any
 
@@ -23,7 +23,7 @@ afterEach(() => {
 describe('useSafeEffect', () => {
   it('works with no deps', async () => {
     const sideEffect = jest.fn()
-    const C = ({p1}:{p1: number}) => {
+    const C = ({p1}: {p1: number}) => {
       useSafeEffect(() => sideEffect(), [])
       return <>{p1}</>
     }
@@ -49,7 +49,7 @@ describe('useSafeEffect', () => {
     function fDefault(a: boolean = true) {
       sideEffect(a)
     }
-    const C = ({p1}:{p1: number}) => {
+    const C = ({p1}: {p1: number}) => {
       useSafeEffect(fDefault, [])
       return <>{p1}</>
     }
@@ -61,7 +61,7 @@ describe('useSafeEffect', () => {
 
   it('works with only primitive deps', async () => {
     const sideEffect = jest.fn()
-    const C = ({p1, p2}:{p1: number, p2: number}) => {
+    const C = ({p1, p2}: {p1: number; p2: number}) => {
       useSafeEffect(() => sideEffect(p1), [p1])
       return <>{p2}</>
     }
@@ -96,7 +96,7 @@ describe('useSafeEffect', () => {
     }: {
       p1: {
         text: string
-      },
+      }
       p2: number
     }) => {
       useSafeEffectExtraDeps(({say}) => sideEffect(say), [], {
@@ -138,7 +138,7 @@ describe('useSafeEffect', () => {
   it('works with array as extra dep', async () => {
     const countTrue = jest.fn((arr: Array<boolean>): number => arr.filter(x => x === true).length)
 
-    const C = ({p1, p2}: {p1: Array<boolean>, p2: number}) => {
+    const C = ({p1, p2}: {p1: Array<boolean>; p2: number}) => {
       useSafeEffectExtraDeps(
         ({p1}) => {
           // Cannot return anything except a clean-up function
@@ -193,14 +193,14 @@ describe('useSafeEffect', () => {
         sideEffect(a, b)
       }
 
-    const A = ({p1, p2, p3}: {p1:number, p2: number, p3: number}) => {
+    const A = ({p1, p2, p3}: {p1: number; p2: number; p3: number}) => {
       const cbF = useSafeCallback(() => {
         return f(p1)
       }, [p1])
 
       return <C p2={p2} p3={p3} f={cbF} />
     }
-    const C = ({f, p2, p3}: {f: (v: any) => any, p2: number, p3: number}) => {
+    const C = ({f, p2, p3}: {f: (v: any) => any; p2: number; p3: number}) => {
       useSafeEffectExtraDeps(
         ({p3, f}) => {
           return f(p3)
@@ -255,9 +255,9 @@ describe('useSafeEffect', () => {
     }: {
       p1: {
         text: string
-      },
-      p2: Array<string>,
-      p3: number,
+      }
+      p2: Array<string>
+      p3: number
       p4: boolean
     }) => {
       useSafeEffectExtraDeps(
@@ -314,14 +314,14 @@ describe('useSafeEffect', () => {
 
   it('runs clean-up function', async () => {
     const cleanup = jest.fn()
-    const sideEffect = jest.fn((v : any) => cleanup)
+    const sideEffect = jest.fn((v: any) => cleanup)
     const C = ({
       p1,
       p2
     }: {
       p1: {
         text: string
-      },
+      }
       p2: number
     }) => {
       useSafeEffectExtraDeps(({say}) => sideEffect(say), [], {

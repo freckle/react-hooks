@@ -1,9 +1,9 @@
 import invariant from 'invariant'
 import last from 'lodash/last'
 import * as React from 'react'
-import { render, unmountComponentAtNode } from 'react-dom'
-import { act } from 'react-dom/test-utils'
-import { useExtraDeps } from '.'
+import {render, unmountComponentAtNode} from 'react-dom'
+import {act} from 'react-dom/test-utils'
+import {useExtraDeps} from '.'
 
 let container: HTMLElement = null as any
 
@@ -22,7 +22,7 @@ afterEach(() => {
 describe('useExtraDeps', () => {
   it('works with extra deps', async () => {
     let symbol
-    const C = ({p1}:{p1: number}) => {
+    const C = ({p1}: {p1: number}) => {
       const {allDeps} = useExtraDeps([], {
         p1: {value: p1, comparator: (a: number, b: number) => a === b}
       })
