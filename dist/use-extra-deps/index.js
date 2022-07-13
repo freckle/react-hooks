@@ -27,6 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useExtraDeps = exports.unsafeMkCallbackFn = exports.unCallbackFn = void 0;
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 const isFunction_1 = __importDefault(require("lodash/isFunction"));
 const mapValues_1 = __importDefault(require("lodash/mapValues"));
 const omitBy_1 = __importDefault(require("lodash/omitBy"));

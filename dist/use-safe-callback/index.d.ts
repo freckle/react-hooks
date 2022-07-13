@@ -4,4 +4,4 @@ export declare function useSafeCallbackExtraDeps<F extends (v: any) => any, T ex
     [P in keyof S]: S[P] extends ExtraDeps<infer R> ? R : never;
 }, S extends {
     [key: string]: ExtraDeps<unknown>;
-} = {}>(f: (a: T) => F, deps: ReadonlyArray<PrimitiveDep>, extraDeps: S): CallbackFn<F>;
+} = Record<string, unknown>>(f: (a: T) => F, deps: ReadonlyArray<PrimitiveDep>, extraDeps: S): CallbackFn<F>;
