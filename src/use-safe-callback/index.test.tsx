@@ -1,24 +1,6 @@
-import invariant from 'invariant'
 import * as React from 'react'
-import {render, unmountComponentAtNode} from 'react-dom'
-import {act} from 'react-dom/test-utils'
+import {render} from '@testing-library/react'
 import {useSafeCallback, useSafeCallbackExtraDeps} from '.'
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let container: HTMLElement = null as any
-
-beforeEach(() => {
-  container = document.createElement('div')
-  invariant(document.body !== null, 'body is not null')
-  document.body.appendChild(container)
-})
-
-afterEach(() => {
-  unmountComponentAtNode(container)
-  container.remove()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  container = null as any
-})
 
 describe('useSafeCallback', () => {
   it('works with dep', async () => {
@@ -27,22 +9,16 @@ describe('useSafeCallback', () => {
       f = useSafeCallback(() => () => p1, [p1])
       return null
     }
-    await act(async () => {
-      render(<A p1={0} />, container)
-    })
+    const {rerender} = render(<A p1={0} />)
     let cbF = f
 
     // f stays the same reference when prop stays the same
-    await act(async () => {
-      render(<A p1={0} />, container)
-    })
+    rerender(<A p1={0} />)
     expect(cbF).toBe(f)
     cbF = f
 
     // f changes reference when prop changes
-    await act(async () => {
-      render(<A p1={1} />, container)
-    })
+    rerender(<A p1={1} />)
     expect(cbF).not.toBe(f)
   })
 })
@@ -66,22 +42,16 @@ describe('useSafeCallbackExtraDeps', () => {
       )
       return null
     }
-    await act(async () => {
-      render(<A p1={arr1} />, container)
-    })
+    const {rerender} = render(<A p1={arr1} />)
     let cbF = f
 
     // f stays the same reference when prop stays the same
-    await act(async () => {
-      render(<A p1={arr1} />, container)
-    })
+    rerender(<A p1={arr1} />)
     expect(cbF).toBe(f)
     cbF = f
 
     // f changes reference when prop changes
-    await act(async () => {
-      render(<A p1={arr2} />, container)
-    })
+    rerender(<A p1={arr2} />)
     expect(cbF).not.toBe(f)
   })
 })
