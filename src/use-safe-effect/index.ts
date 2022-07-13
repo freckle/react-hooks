@@ -11,7 +11,7 @@ export const useSafeEffectExtraDeps = <
   T extends {[P in keyof S]: S[P] extends ExtraDeps<infer R> ? R : never},
   S extends {
     [key: string]: ExtraDeps<unknown>
-  } = {}
+  } = Record<string, unknown>
 >(
   effect: (a: T) => MaybeCleanUpFn,
   deps: ReadonlyArray<PrimitiveDep>,
