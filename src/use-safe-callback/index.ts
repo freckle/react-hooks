@@ -28,7 +28,6 @@ export function useSafeCallbackExtraDeps<
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const cb = React.useCallback(f(extraDepValues), allDeps)
 
-  //$FlowFixMe: Can't unify `F` with useCallback but we know that they are the same
   const cbF: F = cb
 
   return unsafeMkCallbackFn(cbF)
