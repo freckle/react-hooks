@@ -16,5 +16,6 @@ jobs:
       - run: yarn install
       - run: yarn build
       - run: yarn gen-flow
+      - run: yarn lint
       - run: yarn test
       - run: yarn run check-git-clean
