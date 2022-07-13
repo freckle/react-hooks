@@ -189,15 +189,8 @@
   },
   "overrides": [
 	{
-	  "files": ["*.test.js"],
+	  "files": ["*.test.tsx"],
 	  "extends": ["plugin:testing-library/react", "plugin:jest-dom/recommended"]
-	},
-	{
-	  "files": ["*.ts", "*.tsx"],
-	  "rules": {
-		"flowtype/require-valid-file-annotation": 0,
-		"flowtype/no-types-missing-file-annotation": 0
-	  }
 	}
   ]
 }
