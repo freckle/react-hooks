@@ -24,6 +24,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useSafeCallbackExtraDeps = exports.useSafeCallback = void 0;
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 const React = __importStar(require("react"));
 const use_extra_deps_1 = require("./../use-extra-deps");
 function useSafeCallback(f, deps) {
@@ -35,7 +36,6 @@ function useSafeCallbackExtraDeps(f, deps, extraDeps) {
     const { extraDepValues, allDeps } = (0, use_extra_deps_1.useExtraDeps)(deps, extraDeps);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const cb = React.useCallback(f(extraDepValues), allDeps);
-    //$FlowFixMe: Can't unify `F` with useCallback but we know that they are the same
     const cbF = cb;
     return (0, use_extra_deps_1.unsafeMkCallbackFn)(cbF);
 }
