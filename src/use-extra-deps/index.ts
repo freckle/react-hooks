@@ -6,7 +6,7 @@ import values from 'lodash/values'
 import * as React from 'react'
 
 // Dependencies that are safe to use in the normal `useEffect` deps array
-export type PrimitiveDep = boolean | string | number | null | void | Symbol
+export type PrimitiveDep = boolean | string | number | null | void | symbol
 
 // Wrapper around a function that has been wrapped in `useSafeCallback`. This
 // type is here to avoid cyclical dependencies.
@@ -44,7 +44,7 @@ export function useExtraDeps<
   T extends {[P in keyof S]: S[P] extends ExtraDeps<infer R> ? R : never},
   S extends {
     [key: string]: ExtraDeps<unknown>
-  } = {}
+  } = Record<string, unknown>
 >(
   deps: ReadonlyArray<PrimitiveDep>,
   extraDeps: S
@@ -52,7 +52,7 @@ export function useExtraDeps<
   allDeps: ReadonlyArray<any>
   extraDepValues: T
 } {
-  const [run, setRun] = React.useState<Symbol>(Symbol())
+  const [run, setRun] = React.useState<symbol>(Symbol())
   const nonFnsRef = React.useRef<null | any>(null)
 
   const fns: any = pickBy(extraDeps, isFunction)

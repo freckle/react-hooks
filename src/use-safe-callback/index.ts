@@ -20,7 +20,7 @@ export function useSafeCallbackExtraDeps<
   T extends {[P in keyof S]: S[P] extends ExtraDeps<infer R> ? R : never},
   S extends {
     [key: string]: ExtraDeps<unknown>
-  } = {}
+  } = Record<string, unknown>
 >(f: (a: T) => F, deps: ReadonlyArray<PrimitiveDep>, extraDeps: S): CallbackFn<F> {
   const {extraDepValues, allDeps} = useExtraDeps<T>(deps, extraDeps)
 

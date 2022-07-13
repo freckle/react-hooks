@@ -46,7 +46,7 @@ describe('useSafeEffect', () => {
 
   it('works with default param', async () => {
     const sideEffect = jest.fn()
-    function fDefault(a: boolean = true) {
+    function fDefault(a = true) {
       sideEffect(a)
     }
     const C = ({p1}: {p1: number}) => {
