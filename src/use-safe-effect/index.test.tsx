@@ -6,6 +6,7 @@ import {act} from 'react-dom/test-utils'
 import {useSafeEffect, useSafeEffectExtraDeps} from '.'
 import {useSafeCallback} from './../use-safe-callback'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let container: HTMLElement = null as any
 
 beforeEach(() => {
@@ -17,6 +18,7 @@ beforeEach(() => {
 afterEach(() => {
   unmountComponentAtNode(container)
   container.remove()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   container = null as any
 })
 
@@ -200,6 +202,7 @@ describe('useSafeEffect', () => {
 
       return <C p2={p2} p3={p3} f={cbF} />
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const C = ({f, p2, p3}: {f: (v: any) => any; p2: number; p3: number}) => {
       useSafeEffectExtraDeps(
         ({p3, f}) => {
@@ -314,7 +317,8 @@ describe('useSafeEffect', () => {
 
   it('runs clean-up function', async () => {
     const cleanup = jest.fn()
-    const sideEffect = jest.fn((v: any) => cleanup)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sideEffect = jest.fn((_v: any) => cleanup)
     const C = ({
       p1,
       p2
