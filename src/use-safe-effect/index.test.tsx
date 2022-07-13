@@ -1,26 +1,8 @@
-import invariant from 'invariant'
 import isEqual from 'lodash/isEqual'
 import * as React from 'react'
-import {render, unmountComponentAtNode} from 'react-dom'
-import {act} from 'react-dom/test-utils'
+import {render} from '@testing-library/react'
 import {useSafeEffect, useSafeEffectExtraDeps} from '.'
 import {useSafeCallback} from './../use-safe-callback'
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let container: HTMLElement = null as any
-
-beforeEach(() => {
-  container = document.createElement('div')
-  invariant(document.body !== null, 'body is not null')
-  document.body.appendChild(container)
-})
-
-afterEach(() => {
-  unmountComponentAtNode(container)
-  container.remove()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  container = null as any
-})
 
 describe('useSafeEffect', () => {
   it('works with no deps', async () => {
@@ -34,15 +16,11 @@ describe('useSafeEffect', () => {
     expect(sideEffect).toHaveBeenCalledTimes(0)
 
     // Runs effect on first render
-    await act(async () => {
-      render(<C p1={0} />, container)
-    })
+    const {rerender} = render(<C p1={0} />)
     expect(sideEffect).toHaveBeenCalledTimes(1)
 
     // Does not run effect on props change
-    await act(async () => {
-      render(<C p1={1} />, container)
-    })
+    rerender(<C p1={1} />)
     expect(sideEffect).toHaveBeenCalledTimes(1)
   })
 
@@ -55,9 +33,7 @@ describe('useSafeEffect', () => {
       useSafeEffect(fDefault, [])
       return <>{p1}</>
     }
-    await act(async () => {
-      render(<C p1={0} />, container)
-    })
+    render(<C p1={0} />)
     expect(sideEffect).toHaveBeenCalledWith(true)
   })
 
@@ -72,21 +48,15 @@ describe('useSafeEffect', () => {
     expect(sideEffect).toHaveBeenCalledTimes(0)
 
     // Runs effect on first render
-    await act(async () => {
-      render(<C p1={0} p2={-100} />, container)
-    })
+    const {rerender} = render(<C p1={0} p2={-100} />)
     expect(sideEffect).toHaveBeenCalledTimes(1)
 
     // Does not run effect when props change that are not in deps
-    await act(async () => {
-      render(<C p1={0} p2={0} />, container)
-    })
+    rerender(<C p1={0} p2={0} />)
     expect(sideEffect).toHaveBeenCalledTimes(1)
 
     // Runs effect when props change that are in dep
-    await act(async () => {
-      render(<C p1={2} p2={2} />, container)
-    })
+    rerender(<C p1={2} p2={2} />)
     expect(sideEffect).toHaveBeenCalledTimes(2)
   })
 
@@ -113,26 +83,20 @@ describe('useSafeEffect', () => {
     const hi1 = {text: 'hi'}
 
     // Runs effect on first render
-    await act(async () => {
-      render(<C p1={hi1} p2={0} />, container)
-    })
+    const {rerender} = render(<C p1={hi1} p2={0} />)
     expect(sideEffect).toHaveBeenCalledTimes(1)
     expect(sideEffect).toHaveBeenLastCalledWith(hi1)
 
     // Does not run effect when deps are same based on comparator
     const hi2 = {text: 'hi'}
 
-    await act(async () => {
-      render(<C p1={hi2} p2={0} />, container)
-    })
+    rerender(<C p1={hi2} p2={0} />)
     expect(sideEffect).toHaveBeenCalledTimes(1)
 
     const hello = {text: 'hello'}
 
     // Runs effect when deps change
-    await act(async () => {
-      render(<C p1={hello} p2={0} />, container)
-    })
+    rerender(<C p1={hello} p2={0} />)
     expect(sideEffect).toHaveBeenCalledTimes(2)
     expect(sideEffect).toHaveBeenLastCalledWith(hello)
   })
@@ -161,9 +125,7 @@ describe('useSafeEffect', () => {
     const arr1 = [true, false, true]
 
     // Runs effect on first render
-    await act(async () => {
-      render(<C p1={arr1} p2={0} />, container)
-    })
+    const {rerender} = render(<C p1={arr1} p2={0} />)
     expect(countTrue).toHaveBeenCalledTimes(1)
     expect(countTrue).toHaveBeenLastCalledWith(arr1)
     expect(countTrue).toHaveReturnedWith(2)
@@ -171,17 +133,13 @@ describe('useSafeEffect', () => {
     // Does not run effect when deps are same based on comparator
     const arr2 = [true, false, false]
 
-    await act(async () => {
-      render(<C p1={arr2} p2={0} />, container)
-    })
+    rerender(<C p1={arr2} p2={0} />)
     expect(countTrue).toHaveBeenCalledTimes(1)
 
     const arr3 = [true, false]
 
     // Runs effect when deps change
-    await act(async () => {
-      render(<C p1={arr3} p2={0} />, container)
-    })
+    rerender(<C p1={arr3} p2={0} />)
     expect(countTrue).toHaveBeenCalledTimes(2)
     expect(countTrue).toHaveBeenLastCalledWith(arr3)
     expect(countTrue).toHaveReturnedWith(1)
@@ -218,29 +176,21 @@ describe('useSafeEffect', () => {
     expect(sideEffect).toHaveBeenCalledTimes(0)
 
     // Runs effect on first render
-    await act(async () => {
-      render(<A p1={0} p2={0} p3={0} />, container)
-    })
+    const {rerender} = render(<A p1={0} p2={0} p3={0} />)
     expect(sideEffect).toHaveBeenCalledTimes(1)
     expect(sideEffect).toHaveBeenLastCalledWith(0, 0)
 
     // Does not run effect on non-dep props change
-    await act(async () => {
-      render(<A p1={0} p2={1} p3={0} />, container)
-    })
+    rerender(<A p1={0} p2={1} p3={0} />)
     expect(sideEffect).toHaveBeenCalledTimes(1)
 
     // Does run effect on useCB dep change
-    await act(async () => {
-      render(<A p1={1} p2={1} p3={0} />, container)
-    })
+    rerender(<A p1={1} p2={1} p3={0} />)
     expect(sideEffect).toHaveBeenCalledTimes(2)
     expect(sideEffect).toHaveBeenLastCalledWith(1, 0)
 
     // Does run effect on useEffect dep change
-    await act(async () => {
-      render(<A p1={1} p2={1} p3={1} />, container)
-    })
+    rerender(<A p1={1} p2={1} p3={1} />)
     expect(sideEffect).toHaveBeenCalledTimes(3)
     expect(sideEffect).toHaveBeenLastCalledWith(1, 1)
   })
@@ -282,36 +232,24 @@ describe('useSafeEffect', () => {
     expect(computation).toHaveBeenCalledTimes(0)
 
     // Runs effect on first render
-    await act(async () => {
-      render(<C p1={{text: 'test'}} p2={['a', 'b']} p3={3} p4 />, container)
-    })
+    const {rerender} = render(<C p1={{text: 'test'}} p2={['a', 'b']} p3={3} p4 />)
     expect(computation).toHaveBeenCalledTimes(1)
 
     // Does not run effect when props change memory locations
-    await act(async () => {
-      render(<C p1={{text: 'test'}} p2={['a', 'b']} p3={3} p4 />, container)
-    })
+    rerender(<C p1={{text: 'test'}} p2={['a', 'b']} p3={3} p4 />)
     expect(computation).toHaveBeenCalledTimes(1)
 
     // Runs effect when deps chnge
-    await act(async () => {
-      render(<C p1={{text: 'test_foo'}} p2={['a', 'b']} p3={3} p4 />, container)
-    })
+    rerender(<C p1={{text: 'test_foo'}} p2={['a', 'b']} p3={3} p4 />)
     expect(computation).toHaveBeenCalledTimes(2)
 
-    await act(async () => {
-      render(<C p1={{text: 'test_foo'}} p2={['b', 'a']} p3={3} p4 />, container)
-    })
+    rerender(<C p1={{text: 'test_foo'}} p2={['b', 'a']} p3={3} p4 />)
     expect(computation).toHaveBeenCalledTimes(3)
 
-    await act(async () => {
-      render(<C p1={{text: 'test_foo'}} p2={['b', 'a']} p3={4} p4 />, container)
-    })
+    rerender(<C p1={{text: 'test_foo'}} p2={['b', 'a']} p3={4} p4 />)
     expect(computation).toHaveBeenCalledTimes(4)
 
-    await act(async () => {
-      render(<C p1={{text: 'test_foo'}} p2={['b', 'a']} p3={4} p4={false} />, container)
-    })
+    rerender(<C p1={{text: 'test_foo'}} p2={['b', 'a']} p3={4} p4={false} />)
     expect(computation).toHaveBeenCalledTimes(5)
   })
 
@@ -338,21 +276,15 @@ describe('useSafeEffect', () => {
     expect(cleanup).toHaveBeenCalledTimes(0)
 
     // Does not run clean-up on first render
-    await act(async () => {
-      render(<C p1={{text: 'hi'}} p2={0} />, container)
-    })
+    const {rerender} = render(<C p1={{text: 'hi'}} p2={0} />)
     expect(cleanup).toHaveBeenCalledTimes(0)
 
     // Runs clean-up when effect runs
-    await act(async () => {
-      render(<C p1={{text: 'hello'}} p2={0} />, container)
-    })
+    rerender(<C p1={{text: 'hello'}} p2={0} />)
     expect(cleanup).toHaveBeenCalledTimes(1)
 
     // Does not run clean-up when effect does not run
-    await act(async () => {
-      render(<C p1={{text: 'hello'}} p2={0} />, container)
-    })
+    rerender(<C p1={{text: 'hello'}} p2={0} />)
     expect(cleanup).toHaveBeenCalledTimes(1)
   })
 })

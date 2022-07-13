@@ -1,25 +1,7 @@
-import invariant from 'invariant'
 import last from 'lodash/last'
 import * as React from 'react'
-import {render, unmountComponentAtNode} from 'react-dom'
-import {act} from 'react-dom/test-utils'
+import {render} from '@testing-library/react'
 import {useExtraDeps} from '.'
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let container: HTMLElement = null as any
-
-beforeEach(() => {
-  container = document.createElement('div')
-  invariant(document.body !== null, 'body is not null')
-  document.body.appendChild(container)
-})
-
-afterEach(() => {
-  unmountComponentAtNode(container)
-  container.remove()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  container = null as any
-})
 
 describe('useExtraDeps', () => {
   it('works with extra deps', async () => {
@@ -32,22 +14,16 @@ describe('useExtraDeps', () => {
       symbol = last(allDeps)
       return <>{p1}</>
     }
-    await act(async () => {
-      render(<C p1={0} />, container)
-    })
+    const {rerender} = render(<C p1={0} />)
     let lastSymbol = symbol
 
     //Symbol should stay the same if p1 stays the same
-    await act(async () => {
-      render(<C p1={0} />, container)
-    })
+    rerender(<C p1={0} />)
     expect(lastSymbol).toBe(symbol)
     lastSymbol = symbol
 
     //Symbol should differ if p1 differs
-    await act(async () => {
-      render(<C p1={1} />, container)
-    })
+    rerender(<C p1={1} />)
     expect(lastSymbol).not.toBe(symbol)
   })
 })
