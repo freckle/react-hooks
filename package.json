@@ -27,7 +27,6 @@
   "repository": "git@github.com:freckle/react-hooks.git",
   "author": "Freckle",
   "license": "MIT",
-  "private": true,
   "peerDependencies": {
     "react": ">= 16.8.0"
   },
