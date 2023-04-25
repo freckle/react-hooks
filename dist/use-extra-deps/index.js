@@ -28,17 +28,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useExtraDeps = exports.unsafeMkCallbackFn = exports.unCallbackFn = void 0;
 /* eslint @typescript-eslint/no-explicit-any: 0 */
-const isFunction_1 = __importDefault(require("lodash/isFunction"));
 const mapValues_1 = __importDefault(require("lodash/mapValues"));
 const omitBy_1 = __importDefault(require("lodash/omitBy"));
 const pickBy_1 = __importDefault(require("lodash/pickBy"));
 const values_1 = __importDefault(require("lodash/values"));
 const React = __importStar(require("react"));
-const unCallbackFn = (fn) => fn;
+const unCallbackFn = ({ callback }) => callback;
 exports.unCallbackFn = unCallbackFn;
 // Used only by `useSafeCallback`
-function unsafeMkCallbackFn(f) {
-    return f;
+function unsafeMkCallbackFn(callback) {
+    return { callback };
 }
 exports.unsafeMkCallbackFn = unsafeMkCallbackFn;
 // Hook used to help avoid pitfalls surrounding misuse of objects and arrays in
@@ -58,8 +57,8 @@ exports.unsafeMkCallbackFn = unsafeMkCallbackFn;
 function useExtraDeps(deps, extraDeps) {
     const [run, setRun] = React.useState(Symbol());
     const nonFnsRef = React.useRef(null);
-    const fns = (0, pickBy_1.default)(extraDeps, isFunction_1.default);
-    const nonFns = (0, omitBy_1.default)(extraDeps, isFunction_1.default);
+    const fns = (0, mapValues_1.default)((0, pickBy_1.default)(extraDeps, dep => 'callback' in dep), fn => fn.callback);
+    const nonFns = (0, omitBy_1.default)(extraDeps, dep => 'callback' in dep);
     const hasChange = () => {
         if (nonFnsRef.current === null || nonFnsRef.current === undefined) {
             return true;
