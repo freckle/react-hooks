@@ -1,5 +1,4 @@
 /* eslint @typescript-eslint/no-explicit-any: 0 */
-import isFunction from 'lodash/isFunction'
 import mapValues from 'lodash/mapValues'
 import omitBy from 'lodash/omitBy'
 import pickBy from 'lodash/pickBy'
@@ -11,13 +10,13 @@ export type PrimitiveDep = boolean | string | number | null | void | symbol
 
 // Wrapper around a function that has been wrapped in `useSafeCallback`. This
 // type is here to avoid cyclical dependencies.
-export type CallbackFn<F> = F
+export type CallbackFn<F> = {callback: F}
 
-export const unCallbackFn = <F>(fn: CallbackFn<F>): F => fn
+export const unCallbackFn = <F>({callback}: CallbackFn<F>): F => callback
 
 // Used only by `useSafeCallback`
-export function unsafeMkCallbackFn<F extends (v: any) => any>(f: F): CallbackFn<F> {
-  return f
+export function unsafeMkCallbackFn<F extends (v: any) => any>(callback: F): CallbackFn<F> {
+  return {callback}
 }
 
 export type ExtraDeps<V> =
@@ -41,14 +40,9 @@ export type ExtraDeps<V> =
 // An object that has the same keys as extraDeps but contains their plain values
 // }
 //
-export function useExtraDeps<
-  T extends {[P in keyof S]: S[P] extends ExtraDeps<infer R> ? R : never},
-  S extends {
-    [key: string]: ExtraDeps<unknown>
-  } = Record<string, unknown>
->(
+export function useExtraDeps<T extends Record<string, unknown>>(
   deps: ReadonlyArray<PrimitiveDep>,
-  extraDeps: S
+  extraDeps: {[P in keyof T]: T[P] extends infer R ? ExtraDeps<R> : never}
 ): {
   allDeps: ReadonlyArray<any>
   extraDepValues: T
@@ -56,9 +50,11 @@ export function useExtraDeps<
   const [run, setRun] = React.useState<symbol>(Symbol())
   const nonFnsRef = React.useRef<null | any>(null)
 
-  const fns: any = pickBy(extraDeps, isFunction)
-  const nonFns: any = omitBy(extraDeps, isFunction)
-
+  const fns: any = mapValues(
+    pickBy(extraDeps, dep => 'callback' in dep),
+    fn => (fn as any).callback
+  )
+  const nonFns: any = omitBy(extraDeps, dep => 'callback' in dep)
   const hasChange = () => {
     if (nonFnsRef.current === null || nonFnsRef.current === undefined) {
       return true

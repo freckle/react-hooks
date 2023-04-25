@@ -18,11 +18,12 @@ export function useSafeCallback<F extends (v: any) => any>(
 
 export function useSafeCallbackExtraDeps<
   F extends (v: any) => any,
-  T extends {[P in keyof S]: S[P] extends ExtraDeps<infer R> ? R : never},
-  S extends {
-    [key: string]: ExtraDeps<unknown>
-  } = Record<string, unknown>
->(f: (a: T) => F, deps: ReadonlyArray<PrimitiveDep>, extraDeps: S): CallbackFn<F> {
+  T extends Record<string, unknown>
+>(
+  f: (a: T) => F,
+  deps: ReadonlyArray<PrimitiveDep>,
+  extraDeps: {[P in keyof T]: T[P] extends infer R ? ExtraDeps<R> : never}
+): CallbackFn<F> {
   const {extraDepValues, allDeps} = useExtraDeps<T>(deps, extraDeps)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
