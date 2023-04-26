@@ -7,8 +7,8 @@ describe('useExtraDeps', () => {
   it('works with extra deps', async () => {
     let symbol
     const C = ({p1}: {p1: number}) => {
-      const {allDeps} = useExtraDeps([], {
-        p1: {value: p1, comparator: (a: number, b: number) => a === b}
+      const {allDeps} = useExtraDeps<{p1: number}>([], {
+        p1: {value: p1, comparator: (a, b) => a === b}
       })
       //The symbol is always the last thing in the allDeps array
       symbol = last(allDeps)
@@ -25,5 +25,16 @@ describe('useExtraDeps', () => {
     //Symbol should differ if p1 differs
     rerender(<C p1={1} />)
     expect(lastSymbol).not.toBe(symbol)
+  })
+
+  // This test is only testing the types
+  // It is expected to throw at runtime due to calling hooks outside of a React component
+  it('rejects malformed deps at typelevel', () => {
+    expect(() => {
+      // @ts-expect-error can't pass object with wrong shape
+      useExtraDeps([], {a: 1})
+      // @ts-expect-error can't pass function
+      useExtraDeps([], {a: () => 'hi'})
+    }).toThrow()
   })
 })

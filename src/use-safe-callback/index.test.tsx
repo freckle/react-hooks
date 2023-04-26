@@ -4,22 +4,22 @@ import {useSafeCallback, useSafeCallbackExtraDeps} from '.'
 
 describe('useSafeCallback', () => {
   it('works with dep', async () => {
-    let f
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let f: any
     const A = ({p1}: {p1: number}) => {
       f = useSafeCallback(() => () => p1, [p1])
       return null
     }
     const {rerender} = render(<A p1={0} />)
     let cbF = f
-
     // f stays the same reference when prop stays the same
     rerender(<A p1={0} />)
-    expect(cbF).toBe(f)
+    expect(cbF.callback).toBe(f.callback)
     cbF = f
 
     // f changes reference when prop changes
     rerender(<A p1={1} />)
-    expect(cbF).not.toBe(f)
+    expect(cbF.callback).not.toBe(f.callback)
   })
 })
 
@@ -28,16 +28,17 @@ describe('useSafeCallbackExtraDeps', () => {
     const countTrue = jest.fn((arr: Array<boolean>): number => arr.filter(x => x === true).length)
     const arr1 = [true, false, true]
     const arr2 = [false, true]
-    let f
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let f: any
     const A = ({p1}: {p1: boolean[]}) => {
-      f = useSafeCallbackExtraDeps(
+      f = useSafeCallbackExtraDeps<() => void, {p1: boolean[]}>(
         ({p1}) =>
           () => {
             countTrue(p1)
           },
         [],
         {
-          p1: {value: p1, comparator: (a: boolean[], b: boolean[]) => a.length === b.length}
+          p1: {value: p1, comparator: (a, b) => a.length === b.length}
         }
       )
       return null
@@ -47,11 +48,11 @@ describe('useSafeCallbackExtraDeps', () => {
 
     // f stays the same reference when prop stays the same
     rerender(<A p1={arr1} />)
-    expect(cbF).toBe(f)
+    expect(cbF.callback).toBe(f.callback)
     cbF = f
 
     // f changes reference when prop changes
     rerender(<A p1={arr2} />)
-    expect(cbF).not.toBe(f)
+    expect(cbF.callback).not.toBe(f.callback)
   })
 })

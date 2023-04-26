@@ -7,15 +7,10 @@ export const useSafeEffect = (effect: () => MaybeCleanUpFn, deps: ReadonlyArray<
   return useSafeEffectExtraDeps(() => effect(), deps, {})
 }
 
-export const useSafeEffectExtraDeps = <
-  T extends {[P in keyof S]: S[P] extends ExtraDeps<infer R> ? R : never},
-  S extends {
-    [key: string]: ExtraDeps<unknown>
-  } = Record<string, unknown>
->(
+export const useSafeEffectExtraDeps = <T extends Record<string, unknown>>(
   effect: (a: T) => MaybeCleanUpFn,
   deps: ReadonlyArray<PrimitiveDep>,
-  extraDeps: S
+  extraDeps: {[P in keyof T]: T[P] extends infer R ? ExtraDeps<R> : never}
 ) => {
   const {extraDepValues, allDeps} = useExtraDeps<T>(deps, extraDeps)
 

@@ -3,6 +3,7 @@ import * as React from 'react'
 import {render} from '@testing-library/react'
 import {useSafeEffect, useSafeEffectExtraDeps} from '.'
 import {useSafeCallback} from './../use-safe-callback'
+import {CallbackFn} from '../use-extra-deps'
 
 describe('useSafeEffect', () => {
   it('works with no deps', async () => {
@@ -71,8 +72,8 @@ describe('useSafeEffect', () => {
       }
       p2: number
     }) => {
-      useSafeEffectExtraDeps(({say}) => sideEffect(say), [], {
-        say: {value: p1, comparator: (a: {text: string}, b: {text: string}) => a.text === b.text}
+      useSafeEffectExtraDeps<{say: {text: string}}>(({say}) => sideEffect(say), [], {
+        say: {value: p1, comparator: (a, b) => a.text === b.text}
       })
       return <>{p2}</>
     }
@@ -105,7 +106,7 @@ describe('useSafeEffect', () => {
     const countTrue = jest.fn((arr: Array<boolean>): number => arr.filter(x => x === true).length)
 
     const C = ({p1, p2}: {p1: Array<boolean>; p2: number}) => {
-      useSafeEffectExtraDeps(
+      useSafeEffectExtraDeps<{p1: boolean[]}>(
         ({p1}) => {
           // Cannot return anything except a clean-up function
           countTrue(p1)
@@ -113,7 +114,7 @@ describe('useSafeEffect', () => {
         [],
         {
           // Only run effect when array length changes, regardless of contents
-          p1: {value: p1, comparator: (a: boolean[], b: boolean[]) => a.length === b.length}
+          p1: {value: p1, comparator: (a, b) => a.length === b.length}
         }
       )
       return <>{p2}</>
@@ -160,14 +161,13 @@ describe('useSafeEffect', () => {
 
       return <C p2={p2} p3={p3} f={cbF} />
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const C = ({f, p2, p3}: {f: (v: any) => any; p2: number; p3: number}) => {
-      useSafeEffectExtraDeps(
+    const C = ({f, p2, p3}: {f: CallbackFn<(b: number) => void>; p2: number; p3: number}) => {
+      useSafeEffectExtraDeps<{p3: number; f: (b: number) => void}>(
         ({p3, f}) => {
           return f(p3)
         },
         [],
-        {p3: {value: p3, comparator: (a: number, b: number) => a === b}, f}
+        {p3: {value: p3, comparator: (a, b) => a === b}, f}
       )
       return <>{p2}</>
     }
@@ -213,16 +213,16 @@ describe('useSafeEffect', () => {
       p3: number
       p4: boolean
     }) => {
-      useSafeEffectExtraDeps(
+      useSafeEffectExtraDeps<{p1: {text: string}; p2: string[]}>(
         ({p1, p2}) => {
           // Cannot return anything except a clean-up function
           computation(p1.text, p2, p3, p4)
         },
         [p3, p4],
         {
-          p1: {value: p1, comparator: (a: {text: string}, b: {text: string}) => a.text === b.text},
+          p1: {value: p1, comparator: (a, b) => a.text === b.text},
           // Deep comparison of arrays
-          p2: {value: p2, comparator: (a: string[], b: string[]) => isEqual(a, b)}
+          p2: {value: p2, comparator: (a, b) => isEqual(a, b)}
         }
       )
       return <>{p1.text}</>
@@ -266,8 +266,8 @@ describe('useSafeEffect', () => {
       }
       p2: number
     }) => {
-      useSafeEffectExtraDeps(({say}) => sideEffect(say), [], {
-        say: {value: p1, comparator: (a: {text: string}, b: {text: string}) => a.text === b.text}
+      useSafeEffectExtraDeps<{say: {text: string}}>(({say}) => sideEffect(say), [], {
+        say: {value: p1, comparator: (a, b) => a.text === b.text}
       })
       return <>{p2}</>
     }
