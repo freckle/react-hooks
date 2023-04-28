@@ -15,7 +15,7 @@ export type CallbackFn<F> = {callback: F}
 export const unCallbackFn = <F>({callback}: CallbackFn<F>): F => callback
 
 // Used only by `useSafeCallback`
-export function unsafeMkCallbackFn<F extends (v: any) => any>(callback: F): CallbackFn<F> {
+export function unsafeMkCallbackFn<F extends (...v: any) => any>(callback: F): CallbackFn<F> {
   return {callback}
 }
 

@@ -8,7 +8,7 @@ import {
   type PrimitiveDep
 } from './../use-extra-deps'
 
-export function useSafeCallback<F extends (v: any) => any>(
+export function useSafeCallback<F extends (...v: any) => any>(
   f: () => F,
   deps: ReadonlyArray<PrimitiveDep>
 ): CallbackFn<F> {
@@ -17,7 +17,7 @@ export function useSafeCallback<F extends (v: any) => any>(
 }
 
 export function useSafeCallbackExtraDeps<
-  F extends (v: any) => any,
+  F extends (...v: any) => any,
   T extends Record<string, unknown>
 >(
   f: (a: T) => F,
