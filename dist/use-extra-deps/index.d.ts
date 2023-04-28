@@ -3,7 +3,7 @@ export declare type CallbackFn<F> = {
     callback: F;
 };
 export declare const unCallbackFn: <F>({ callback }: CallbackFn<F>) => F;
-export declare function unsafeMkCallbackFn<F extends (v: any) => any>(callback: F): CallbackFn<F>;
+export declare function unsafeMkCallbackFn<F extends (...v: any) => any>(callback: F): CallbackFn<F>;
 export declare type ExtraDeps<V> = {
     value: V;
     comparator: (a: V, b: V) => boolean;
