@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useExtraDeps = exports.unsafeMkCallbackFn = exports.unCallbackFn = exports.usePrevious = exports.useSafeCallbackExtraDeps = exports.useSafeCallback = exports.useSafeEffectExtraDeps = exports.useSafeEffect = void 0;
+exports.useSafeImperativeHandleExtraDeps = exports.useSafeImperativeHandle = exports.useExtraDeps = exports.unsafeMkCallbackFn = exports.unCallbackFn = exports.usePrevious = exports.useSafeCallbackExtraDeps = exports.useSafeCallback = exports.useSafeEffectExtraDeps = exports.useSafeEffect = void 0;
 var use_safe_effect_1 = require("./use-safe-effect");
 Object.defineProperty(exports, "useSafeEffect", { enumerable: true, get: function () { return use_safe_effect_1.useSafeEffect; } });
 Object.defineProperty(exports, "useSafeEffectExtraDeps", { enumerable: true, get: function () { return use_safe_effect_1.useSafeEffectExtraDeps; } });
@@ -13,3 +13,6 @@ var use_extra_deps_1 = require("./use-extra-deps");
 Object.defineProperty(exports, "unCallbackFn", { enumerable: true, get: function () { return use_extra_deps_1.unCallbackFn; } });
 Object.defineProperty(exports, "unsafeMkCallbackFn", { enumerable: true, get: function () { return use_extra_deps_1.unsafeMkCallbackFn; } });
 Object.defineProperty(exports, "useExtraDeps", { enumerable: true, get: function () { return use_extra_deps_1.useExtraDeps; } });
+var use_safe_imperative_handle_1 = require("./use-safe-imperative-handle");
+Object.defineProperty(exports, "useSafeImperativeHandle", { enumerable: true, get: function () { return use_safe_imperative_handle_1.useSafeImperativeHandle; } });
+Object.defineProperty(exports, "useSafeImperativeHandleExtraDeps", { enumerable: true, get: function () { return use_safe_imperative_handle_1.useSafeImperativeHandleExtraDeps; } });
