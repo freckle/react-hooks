@@ -9,3 +9,8 @@ export {useSafeCallback, useSafeCallbackExtraDeps} from './use-safe-callback'
 export {usePrevious} from './use-previous'
 
 export {unCallbackFn, unsafeMkCallbackFn, useExtraDeps} from './use-extra-deps'
+
+export {
+  useSafeImperativeHandle,
+  useSafeImperativeHandleExtraDeps
+} from './use-safe-imperative-handle'
