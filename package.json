@@ -12,7 +12,7 @@
     "format": "prettier --write 'src/**/*.(ts|tsx)'",
     "check-git-clean": "./check-git-clean.sh",
     "gen-flow": "yarn run flow-copy-source --ignore '**/*.test.js' src dist",
-    "copy:flow-lib": "cpy '**/*.flow' ../dist --cwd=flow-lib --parents"
+    "copy:flow-lib": "cpy '**/*.flow' ../dist --cwd=flow-lib"
   },
   "babel": {
     "presets": [
@@ -45,7 +45,7 @@
     "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
-    "cpy-cli": "3.1.1",
+    "cpy-cli": "^5.0.0",
     "eslint": "^7.28.0",
     "eslint-plugin-jest-dom": "^4.0.1",
     "eslint-plugin-react": "^7.24.0",
