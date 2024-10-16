@@ -26,18 +26,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useExtraDeps = exports.unsafeMkCallbackFn = exports.unCallbackFn = void 0;
+exports.useExtraDeps = exports.unsafeMkCallbackFn = void 0;
 /* eslint @typescript-eslint/no-explicit-any: 0 */
 const mapValues_1 = __importDefault(require("lodash/mapValues"));
-const omitBy_1 = __importDefault(require("lodash/omitBy"));
-const pickBy_1 = __importDefault(require("lodash/pickBy"));
-const values_1 = __importDefault(require("lodash/values"));
 const React = __importStar(require("react"));
-const unCallbackFn = ({ callback }) => callback;
-exports.unCallbackFn = unCallbackFn;
-// Used only by `useSafeCallback`
 function unsafeMkCallbackFn(callback) {
-    return { callback };
+    return callback;
 }
 exports.unsafeMkCallbackFn = unsafeMkCallbackFn;
 // Hook used to help avoid pitfalls surrounding misuse of objects and arrays in
@@ -56,15 +50,13 @@ exports.unsafeMkCallbackFn = unsafeMkCallbackFn;
 //
 function useExtraDeps(deps, extraDeps) {
     const [run, setRun] = React.useState(Symbol());
-    const nonFnsRef = React.useRef(null);
-    const fns = (0, mapValues_1.default)((0, pickBy_1.default)(extraDeps, dep => 'callback' in dep), fn => fn.callback);
-    const nonFns = (0, omitBy_1.default)(extraDeps, dep => 'callback' in dep);
+    const extraDepsRef = React.useRef(null);
     const hasChange = () => {
-        if (nonFnsRef.current === null || nonFnsRef.current === undefined) {
+        if (extraDepsRef.current === null || extraDepsRef.current === undefined) {
             return true;
         }
-        for (const key in nonFns) {
-            if (!nonFns[key].comparator(nonFns[key].value, nonFnsRef.current[key].value)) {
+        for (const key in extraDeps) {
+            if (!extraDeps[key].comparator(extraDeps[key].value, extraDepsRef.current[key].value)) {
                 return true;
             }
         }
@@ -72,11 +64,11 @@ function useExtraDeps(deps, extraDeps) {
     };
     if (hasChange()) {
         setRun(Symbol());
-        nonFnsRef.current = nonFns;
+        extraDepsRef.current = extraDeps;
     }
     return {
-        allDeps: [...deps, ...(0, values_1.default)(fns), run],
-        extraDepValues: Object.assign(Object.assign({}, (0, mapValues_1.default)(nonFns, ({ value }) => value)), fns)
+        allDeps: [...deps, run],
+        extraDepValues: (0, mapValues_1.default)(extraDeps, ({ value }) => value)
     };
 }
 exports.useExtraDeps = useExtraDeps;
