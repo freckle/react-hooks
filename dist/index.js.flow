@@ -1,17 +1,87 @@
-// @flow
+/* @flow */
 
-export type { MaybeCleanUpFn } from "./types.js";
+import * as React from "react";
 
-export type { PrimitiveDep, CallbackFn, ExtraDeps } from "./use-extra-deps";
-
-export { useSafeEffect, useSafeEffectExtraDeps } from "./use-safe-effect";
-
-export { useSafeCallback, useSafeCallbackExtraDeps } from "./use-safe-callback";
-
-export { usePrevious } from "./use-previous";
-
-export {
-  unCallbackFn,
-  unsafeMkCallbackFn,
+import {
+  type PrimitiveDep,
+  type ExtraDeps,
+  type CallbackFn,
   useExtraDeps,
-} from "./use-extra-deps";
+  unsafeMkCallbackFn,
+} from "./../use-extra-deps";
+
+export function useSafeCallback<F: (...Array<any>) => any>(
+  f: () => F,
+  deps: $ReadOnlyArray<PrimitiveDep>
+): CallbackFn<F> {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useSafeCallbackExtraDeps(() => f(), deps, {});
+}
+
+export function useSafeCallbackExtraDeps<
+  F: (...Array<any>) => any,
+  S: { [key: string]: any }
+>(
+  f: ($ObjMap<S, <V>(ExtraDeps<V>) => V>) => F,
+  deps: $ReadOnlyArray<PrimitiveDep>,
+  extraDeps: S
+): CallbackFn<F> {
+  const { extraDepValues, allDeps } = useExtraDeps(deps, extraDeps);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const cb = React.useCallback(f(extraDepValues), allDeps);
+
+  //$FlowFixMe: Can't unify `F` with useCallback but we know that they are the same
+  const cbF: F = cb;
+
+  return unsafeMkCallbackFn(cbF);
+} deps of `useEffect` et. al.
+//
+// By only allowing `PrimitiveDep`s in the `deps` array and forcing functions
+// and non-primitives through `extraDeps`, we can ensure that we are not doing
+// naive reference equality like React does for the `deps` array.
+//
+// See `useSafeEffect` for usage of this hook
+//
+// Returns an object based upon deps and extraDeps: { allDeps: An array that is
+// suitable to use as a deps array for things like `useEffect` , extraDepValues:
+// An object that has the same keys as extraDeps but contains their plain values
+// }
+//
+export function useExtraDeps<S: { [key: string]: any }>(
+  deps: $ReadOnlyArray<PrimitiveDep>,
+  extraDeps: S
+): {|
+  allDeps: $ReadOnlyArray<any>,
+  extraDepValues: $ObjMap<S, <V>(ExtraDeps<V>) => V>,
+|} {
+  const [run, setRun] = React.useState<Symbol>(Symbol());
+  const nonFnsRef = React.useRef(null);
+
+  const fns = pickBy(extraDeps, isFunction);
+  const nonFns = omitBy(extraDeps, isFunction);
+
+  const hasChange = () => {
+    if (nonFnsRef.current === null || nonFnsRef.current === undefined) {
+      return true;
+    }
+    for (const key in nonFns) {
+      if (
+        !nonFns[key].comparator(nonFns[key].value, nonFnsRef.current[key].value)
+      ) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  if (hasChange()) {
+    setRun(Symbol());
+    nonFnsRef.current = nonFns;
+  }
+
+  return {
+    allDeps: [...deps, ...values(fns), run],
+    extraDepValues: { ...mapValues(nonFns, ({ value }) => value), ...fns },
+  };
+}
