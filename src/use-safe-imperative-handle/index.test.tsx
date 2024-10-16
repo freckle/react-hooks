@@ -168,11 +168,11 @@ describe('useSafeImperativeHandle', () => {
     }
 
     const C = ({f, p2, p3}: {f: CallbackFn<(b: number) => number[]>; p2: number; p3: number}) => {
-      useSafeImperativeHandleExtraDeps<{a: string}, {p3: number; f: (b: number) => number[]}>(
+      useSafeImperativeHandleExtraDeps<{a: string}, {p3: number}>(
         ref,
-        ({p3, f}) => cb(...f(p3)),
-        [],
-        {p3: {value: p3, comparator: (a, b) => a === b}, f}
+        ({p3}) => cb(...f(p3)),
+        [f],
+        {p3: {value: p3, comparator: (a, b) => a === b}}
       )
       return <>{p2}</>
     }

@@ -1,30 +1,29 @@
 /* eslint @typescript-eslint/no-explicit-any: 0 */
 import mapValues from 'lodash/mapValues'
-import omitBy from 'lodash/omitBy'
-import pickBy from 'lodash/pickBy'
-import values from 'lodash/values'
 import * as React from 'react'
 
 // Dependencies that are safe to use in the normal `useEffect` deps array
-export type PrimitiveDep = boolean | string | number | null | void | symbol
+export type PrimitiveDep = boolean
+  | string
+  | number
+  | null
+  | void
+  | symbol
+  | CallbackFn<(...v: any) => any>
 
+declare const __brand: unique symbol
 // Wrapper around a function that has been wrapped in `useSafeCallback`. This
 // type is here to avoid cyclical dependencies.
-export type CallbackFn<F> = {callback: F}
+export type CallbackFn<F> = F & { [__brand]: "CallbackFn" }
 
-export const unCallbackFn = <F>({callback}: CallbackFn<F>): F => callback
-
-// Used only by `useSafeCallback`
 export function unsafeMkCallbackFn<F extends (...v: any) => any>(callback: F): CallbackFn<F> {
-  return {callback}
+  return callback as CallbackFn<F>
 }
 
-export type ExtraDeps<V> =
-  | {
+export type ExtraDeps<V> = {
       value: V
       comparator: (a: V, b: V) => boolean
     }
-  | CallbackFn<V>
 
 // Hook used to help avoid pitfalls surrounding misuse of objects and arrays in
 // the deps of `useEffect` et. al.
@@ -48,19 +47,13 @@ export function useExtraDeps<T extends Record<string, unknown>>(
   extraDepValues: T
 } {
   const [run, setRun] = React.useState<symbol>(Symbol())
-  const nonFnsRef = React.useRef<null | any>(null)
-
-  const fns: any = mapValues(
-    pickBy(extraDeps, dep => 'callback' in dep),
-    fn => (fn as any).callback
-  )
-  const nonFns: any = omitBy(extraDeps, dep => 'callback' in dep)
+  const extraDepsRef = React.useRef<null | any>(null)
   const hasChange = () => {
-    if (nonFnsRef.current === null || nonFnsRef.current === undefined) {
+    if (extraDepsRef.current === null || extraDepsRef.current === undefined) {
       return true
     }
-    for (const key in nonFns) {
-      if (!nonFns[key].comparator(nonFns[key].value, nonFnsRef.current[key].value)) {
+    for (const key in extraDeps) {
+      if (!extraDeps[key].comparator(extraDeps[key].value, extraDepsRef.current[key].value)) {
         return true
       }
     }
@@ -69,11 +62,11 @@ export function useExtraDeps<T extends Record<string, unknown>>(
 
   if (hasChange()) {
     setRun(Symbol())
-    nonFnsRef.current = nonFns
+    extraDepsRef.current = extraDeps
   }
 
   return {
-    allDeps: [...deps, ...values(fns), run],
-    extraDepValues: {...mapValues(nonFns, ({value}) => value), ...fns}
+    allDeps: [...deps, run],
+    extraDepValues: mapValues(extraDeps, ({value}) => value) as T
   }
 }
