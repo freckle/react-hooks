@@ -14,30 +14,31 @@ describe('useSafeCallback', () => {
     let cbF = f
     // f stays the same reference when prop stays the same
     rerender(<A p1={0} />)
-    expect(cbF.callback).toBe(f.callback)
+    expect(cbF).toBe(f)
     cbF = f
 
     // f changes reference when prop changes
     rerender(<A p1={1} />)
-    expect(cbF.callback).not.toBe(f.callback)
+    expect(cbF).not.toBe(f)
   })
   it('works with multiple arity function', async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let f: any
-    const A = ({p1}: {p1: number}) => {
-      f = useSafeCallback(() => (_a, _b) => p1, [p1])
+    const A = ({ p1 }: { p1: number }) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      f = useSafeCallback(() => (_a: any, _b: any) => p1, [p1])
       return null
     }
     const {rerender} = render(<A p1={0} />)
     let cbF = f
     // f stays the same reference when prop stays the same
     rerender(<A p1={0} />)
-    expect(cbF.callback).toBe(f.callback)
+    expect(cbF).toBe(f)
     cbF = f
 
     // f changes reference when prop changes
     rerender(<A p1={1} />)
-    expect(cbF.callback).not.toBe(f.callback)
+    expect(cbF).not.toBe(f)
   })
 })
 
@@ -66,12 +67,12 @@ describe('useSafeCallbackExtraDeps', () => {
 
     // f stays the same reference when prop stays the same
     rerender(<A p1={arr1} />)
-    expect(cbF.callback).toBe(f.callback)
+    expect(cbF).toBe(f)
     cbF = f
 
     // f changes reference when prop changes
     rerender(<A p1={arr2} />)
-    expect(cbF.callback).not.toBe(f.callback)
+    expect(cbF).not.toBe(f)
   })
 
   it('works with any arity function', async () => {
@@ -98,11 +99,11 @@ describe('useSafeCallbackExtraDeps', () => {
 
     // f stays the same reference when prop stays the same
     rerender(<A p1={arr1} />)
-    expect(cbF.callback).toBe(f.callback)
+    expect(cbF).toBe(f)
     cbF = f
 
     // f changes reference when prop changes
     rerender(<A p1={arr2} />)
-    expect(cbF.callback).not.toBe(f.callback)
+    expect(cbF).not.toBe(f)
   })
 })
