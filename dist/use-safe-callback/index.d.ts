@@ -3,3 +3,4 @@ export declare function useSafeCallback<F extends (...v: any) => any>(f: () => F
 export declare function useSafeCallbackExtraDeps<F extends (...v: any) => any, T extends Record<string, unknown>>(f: (a: T) => F, deps: ReadonlyArray<PrimitiveDep>, extraDeps: {
     [P in keyof T]: T[P] extends infer R ? ExtraDeps<R> : never;
 }): CallbackFn<F>;
+export declare const noopCallback: CallbackFn<(...args: any[]) => void>;

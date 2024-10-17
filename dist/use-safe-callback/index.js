@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useSafeCallbackExtraDeps = exports.useSafeCallback = void 0;
+exports.noopCallback = exports.useSafeCallbackExtraDeps = exports.useSafeCallback = void 0;
 /* eslint @typescript-eslint/no-explicit-any: 0 */
 const React = __importStar(require("react"));
 const use_extra_deps_1 = require("./../use-extra-deps");
@@ -40,3 +40,8 @@ function useSafeCallbackExtraDeps(f, deps, extraDeps) {
     return (0, use_extra_deps_1.unsafeMkCallbackFn)(cbF);
 }
 exports.useSafeCallbackExtraDeps = useSafeCallbackExtraDeps;
+function noop() {
+    return;
+}
+// noop is a stable reference so is safe to use as a `CallbackFn`
+exports.noopCallback = (0, use_extra_deps_1.unsafeMkCallbackFn)(noop);
