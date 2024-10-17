@@ -33,3 +33,10 @@ export function useSafeCallbackExtraDeps<
 
   return unsafeMkCallbackFn(cbF)
 }
+
+function noop() {
+  return
+}
+
+// noop is a stable reference so is safe to use as a `CallbackFn`
+export const noopCallback: CallbackFn<(...args: any[]) => void> = unsafeMkCallbackFn(noop)
