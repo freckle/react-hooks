@@ -4,20 +4,17 @@
   "description": "React hooks used at Freckle",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc -d && yarn copy:flow-lib",
+    "build": "tsc -d",
     "dev": "watch 'yarn run build' src",
     "test": "jest",
     "test:watch": "yarn run test -- --watch",
     "lint": "eslint src --cache",
     "format": "prettier --write 'src/**/*.(ts|tsx)'",
-    "check-git-clean": "./check-git-clean.sh",
-    "gen-flow": "yarn run flow-copy-source --ignore '**/*.test.js' src dist",
-    "copy:flow-lib": "cpy '**/*.flow' ../dist --cwd=flow-lib"
+    "check-git-clean": "./check-git-clean.sh"
   },
   "babel": {
     "presets": [
       "@babel/preset-env",
-      "@babel/preset-flow",
       "@babel/preset-react"
     ],
     "plugins": [
@@ -35,7 +32,6 @@
     "@babel/core": "^7.17.9",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
-    "@babel/preset-flow": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
     "@testing-library/react": "^15.0.7",
     "@types/invariant": "^2.2.35",
@@ -51,8 +47,6 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-testing-library": "^7.0.0",
-    "flow-copy-source": "^2.0.9",
-    "flowgen": "^1.19.0",
     "jest": "^27.5.1",
     "prettier": "^3.3.2",
     "ts-jest": "^27.1.4",
@@ -61,7 +55,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
-    "flow-bin": "0.256.0",
     "invariant": "^2.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
