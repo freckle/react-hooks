@@ -1,6 +1,6 @@
 {
   "name": "@freckle/react-hooks",
-  "version": "6.1.0",
+  "version": "7.0.0",
   "description": "React hooks used at Freckle",
   "main": "dist/index.js",
   "scripts": {
