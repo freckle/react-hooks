@@ -1,1 +1,1 @@
-export declare type MaybeCleanUpFn = void | (() => void);
+export type MaybeCleanUpFn = void | (() => void);
