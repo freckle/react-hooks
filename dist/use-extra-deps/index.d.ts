@@ -1,10 +1,10 @@
-export declare type PrimitiveDep = boolean | string | number | null | void | symbol | CallbackFn<(...v: any) => any>;
+export type PrimitiveDep = boolean | string | number | null | void | symbol | CallbackFn<(...v: any) => any>;
 declare const __brand: unique symbol;
-export declare type CallbackFn<F> = F & {
+export type CallbackFn<F> = F & {
     [__brand]: "CallbackFn";
 };
 export declare function unsafeMkCallbackFn<F extends (...v: any) => any>(callback: F): CallbackFn<F>;
-export declare type ExtraDeps<V> = {
+export type ExtraDeps<V> = {
     value: V;
     comparator: (a: V, b: V) => boolean;
 };
