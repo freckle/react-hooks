@@ -6,7 +6,6 @@ import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import testingLibraryPlugin from 'eslint-plugin-testing-library';
 import jestDomPlugin from 'eslint-plugin-jest-dom';
 import importPlugin from 'eslint-plugin-import';
-import prettierPlugin from 'eslint-plugin-prettier';
 import globals from 'globals';
 
 export default [
@@ -23,7 +22,6 @@ export default [
       'testing-library': testingLibraryPlugin,
       'jest-dom': jestDomPlugin,
       'import': importPlugin,
-      'prettier': prettierPlugin,
     },
     languageOptions: {
       parser: tsParser,
@@ -57,13 +55,6 @@ export default [
     },
     rules: {
       ...importPlugin.configs.recommended.rules,
-      ...prettierPlugin.configs.recommended.rules,
-      'prettier/prettier': ['error', {
-        singleQuote: true,
-        trailingComma: 'es5',
-        printWidth: 100,
-        tabWidth: 2,
-      }],
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
         'warn',

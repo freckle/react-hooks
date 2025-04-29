@@ -27,7 +27,6 @@ exports.useSafeImperativeHandleExtraDeps = exports.useSafeImperativeHandle = voi
 const React = __importStar(require("react"));
 const use_extra_deps_1 = require("./../use-extra-deps");
 const useSafeImperativeHandle = (ref, handle, deps) => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     return (0, exports.useSafeImperativeHandleExtraDeps)(ref, () => handle(), deps, {});
 };
 exports.useSafeImperativeHandle = useSafeImperativeHandle;
