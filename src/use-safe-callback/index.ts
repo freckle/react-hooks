@@ -1,11 +1,12 @@
 /* eslint @typescript-eslint/no-explicit-any: 0 */
 import * as React from 'react'
+
 import {
   unsafeMkCallbackFn,
   useExtraDeps,
   type CallbackFn,
   type ExtraDeps,
-  type PrimitiveDep
+  type PrimitiveDep,
 } from './../use-extra-deps'
 
 export function useSafeCallback<F extends (...v: any) => any>(
@@ -18,7 +19,7 @@ export function useSafeCallback<F extends (...v: any) => any>(
 
 export function useSafeCallbackExtraDeps<
   F extends (...v: any) => any,
-  T extends Record<string, unknown>
+  T extends Record<string, unknown>,
 >(
   f: (a: T) => F,
   deps: ReadonlyArray<PrimitiveDep>,

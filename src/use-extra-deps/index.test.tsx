@@ -1,6 +1,7 @@
+import {render} from '@testing-library/react'
 import last from 'lodash/last'
 import * as React from 'react'
-import {render} from '@testing-library/react'
+
 import {useExtraDeps} from '.'
 
 describe('useExtraDeps', () => {
@@ -8,7 +9,7 @@ describe('useExtraDeps', () => {
     let symbol
     const C = ({p1}: {p1: number}) => {
       const {allDeps} = useExtraDeps<{p1: number}>([], {
-        p1: {value: p1, comparator: (a, b) => a === b}
+        p1: {value: p1, comparator: (a, b) => a === b},
       })
       //The symbol is always the last thing in the allDeps array
       symbol = last(allDeps)

@@ -3,7 +3,8 @@ import mapValues from 'lodash/mapValues'
 import * as React from 'react'
 
 // Dependencies that are safe to use in the normal `useEffect` deps array
-export type PrimitiveDep = boolean
+export type PrimitiveDep =
+  | boolean
   | string
   | number
   | null
@@ -14,16 +15,16 @@ export type PrimitiveDep = boolean
 declare const __brand: unique symbol
 // Wrapper around a function that has been wrapped in `useSafeCallback`. This
 // type is here to avoid cyclical dependencies.
-export type CallbackFn<F> = F & { [__brand]: "CallbackFn" }
+export type CallbackFn<F> = F & {[__brand]: 'CallbackFn'}
 
 export function unsafeMkCallbackFn<F extends (...v: any) => any>(callback: F): CallbackFn<F> {
   return callback as CallbackFn<F>
 }
 
 export type ExtraDeps<V> = {
-      value: V
-      comparator: (a: V, b: V) => boolean
-    }
+  value: V
+  comparator: (a: V, b: V) => boolean
+}
 
 // Hook used to help avoid pitfalls surrounding misuse of objects and arrays in
 // the deps of `useEffect` et. al.
@@ -67,6 +68,6 @@ export function useExtraDeps<T extends Record<string, unknown>>(
 
   return {
     allDeps: [...deps, run],
-    extraDepValues: mapValues(extraDeps, ({value}) => value) as T
+    extraDepValues: mapValues(extraDeps, ({value}) => value) as T,
   }
 }

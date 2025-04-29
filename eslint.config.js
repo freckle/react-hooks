@@ -5,6 +5,9 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import testingLibraryPlugin from 'eslint-plugin-testing-library';
 import jestDomPlugin from 'eslint-plugin-jest-dom';
+import importPlugin from 'eslint-plugin-import';
+import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
+import prettierPlugin from 'eslint-plugin-prettier';
 import globals from 'globals';
 
 export default [
@@ -20,6 +23,9 @@ export default [
       'react-hooks': reactHooksPlugin,
       'testing-library': testingLibraryPlugin,
       'jest-dom': jestDomPlugin,
+      'import': importPlugin,
+      'jsx-a11y': jsxA11yPlugin,
+      'prettier': prettierPlugin,
     },
     languageOptions: {
       parser: tsParser,
@@ -36,14 +42,31 @@ export default [
       },
     },
     settings: {
-      'import/extensions': ['.js'],
-      'import/ignore': ['node_modules', '\\.(coffee|scss|css|less|hbs|svg|json)$'],
+      'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+        },
+        node: true,
+      },
       'react': {
         pragma: 'React',
         version: '18.2',
       },
     },
     rules: {
+      ...importPlugin.configs.recommended.rules,
+      ...jsxA11yPlugin.configs.recommended.rules,
+      ...prettierPlugin.configs.recommended.rules,
+      'prettier/prettier': ['error', {
+        singleQuote: true,
+        trailingComma: 'es5',
+        printWidth: 100,
+        tabWidth: 2,
+      }],
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
         'warn',
@@ -55,6 +78,22 @@ export default [
           ignoreRestSiblings: true,
         },
       ],
+      'import/order': ['error', {
+        'groups': [
+          'builtin',
+          'external',
+          'internal',
+          ['parent', 'sibling'],
+          'index',
+          'object',
+          'type',
+        ],
+        'newlines-between': 'always',
+        'alphabetize': {
+          'order': 'asc',
+          'caseInsensitive': true,
+        },
+      }],
       'brace-style': ['warn', '1tbs', { allowSingleLine: true }],
       'class-methods-use-this': [
         'warn',

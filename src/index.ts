@@ -12,5 +12,5 @@ export {unsafeMkCallbackFn, useExtraDeps} from './use-extra-deps'
 
 export {
   useSafeImperativeHandle,
-  useSafeImperativeHandleExtraDeps
+  useSafeImperativeHandleExtraDeps,
 } from './use-safe-imperative-handle'
