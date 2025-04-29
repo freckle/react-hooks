@@ -65,7 +65,7 @@ describe('useSafeImperativeHandle', () => {
     const ref = React.createRef<{a: string}>()
     const C = ({
       p1,
-      p2,
+      p2
     }: {
       p1: {
         text: string
@@ -77,7 +77,7 @@ describe('useSafeImperativeHandle', () => {
         ({say}) => cb(say),
         [],
         {
-          say: {value: p1, comparator: (a: {text: string}, b: {text: string}) => a.text === b.text},
+          say: {value: p1, comparator: (a: {text: string}, b: {text: string}) => a.text === b.text}
         }
       )
       return <>{p2}</>
@@ -119,7 +119,7 @@ describe('useSafeImperativeHandle', () => {
     const C = ({p1, p2}: {p1: Array<boolean>; p2: number}) => {
       useSafeImperativeHandleExtraDeps<{a: string}, {p1: boolean[]}>(ref, ({p1}) => cb(p1), [], {
         // Only run handle when array length changes, regardless of contents
-        p1: {value: p1, comparator: (a, b) => a.length === b.length},
+        p1: {value: p1, comparator: (a, b) => a.length === b.length}
       })
       return <>{p2}</>
     }
@@ -216,7 +216,7 @@ describe('useSafeImperativeHandle', () => {
       p1,
       p2,
       p3,
-      p4,
+      p4
     }: {
       p1: {
         text: string
@@ -232,7 +232,7 @@ describe('useSafeImperativeHandle', () => {
         {
           p1: {value: p1, comparator: (a, b) => a.text === b.text},
           // Deep comparison of arrays
-          p2: {value: p2, comparator: (a, b) => isEqual(a, b)},
+          p2: {value: p2, comparator: (a, b) => isEqual(a, b)}
         }
       )
       return <>{p1.text}</>

@@ -68,6 +68,6 @@ export function useExtraDeps<T extends Record<string, unknown>>(
 
   return {
     allDeps: [...deps, run],
-    extraDepValues: mapValues(extraDeps, ({value}) => value) as T,
+    extraDepValues: mapValues(extraDeps, ({value}) => value) as T
   }
 }

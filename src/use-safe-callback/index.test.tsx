@@ -55,7 +55,7 @@ describe('useSafeCallbackExtraDeps', () => {
           },
         [],
         {
-          p1: {value: p1, comparator: (a, b) => a.length === b.length},
+          p1: {value: p1, comparator: (a, b) => a.length === b.length}
         }
       )
       return null
@@ -87,7 +87,7 @@ describe('useSafeCallbackExtraDeps', () => {
           },
         [],
         {
-          p1: {value: p1, comparator: (a, b) => a.length === b.length},
+          p1: {value: p1, comparator: (a, b) => a.length === b.length}
         }
       )
       return null

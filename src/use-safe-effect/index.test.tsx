@@ -67,7 +67,7 @@ describe('useSafeEffect', () => {
     const sideEffect = jest.fn()
     const C = ({
       p1,
-      p2,
+      p2
     }: {
       p1: {
         text: string
@@ -75,7 +75,7 @@ describe('useSafeEffect', () => {
       p2: number
     }) => {
       useSafeEffectExtraDeps<{say: {text: string}}>(({say}) => sideEffect(say), [], {
-        say: {value: p1, comparator: (a, b) => a.text === b.text},
+        say: {value: p1, comparator: (a, b) => a.text === b.text}
       })
       return <>{p2}</>
     }
@@ -116,7 +116,7 @@ describe('useSafeEffect', () => {
         [],
         {
           // Only run effect when array length changes, regardless of contents
-          p1: {value: p1, comparator: (a, b) => a.length === b.length},
+          p1: {value: p1, comparator: (a, b) => a.length === b.length}
         }
       )
       return <>{p2}</>
@@ -206,7 +206,7 @@ describe('useSafeEffect', () => {
       p1,
       p2,
       p3,
-      p4,
+      p4
     }: {
       p1: {
         text: string
@@ -224,7 +224,7 @@ describe('useSafeEffect', () => {
         {
           p1: {value: p1, comparator: (a, b) => a.text === b.text},
           // Deep comparison of arrays
-          p2: {value: p2, comparator: (a, b) => isEqual(a, b)},
+          p2: {value: p2, comparator: (a, b) => isEqual(a, b)}
         }
       )
       return <>{p1.text}</>
@@ -261,7 +261,7 @@ describe('useSafeEffect', () => {
     const sideEffect = jest.fn((_v: any) => cleanup)
     const C = ({
       p1,
-      p2,
+      p2
     }: {
       p1: {
         text: string
@@ -269,7 +269,7 @@ describe('useSafeEffect', () => {
       p2: number
     }) => {
       useSafeEffectExtraDeps<{say: {text: string}}>(({say}) => sideEffect(say), [], {
-        say: {value: p1, comparator: (a, b) => a.text === b.text},
+        say: {value: p1, comparator: (a, b) => a.text === b.text}
       })
       return <>{p2}</>
     }
