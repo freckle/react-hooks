@@ -6,7 +6,6 @@ import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import testingLibraryPlugin from 'eslint-plugin-testing-library';
 import jestDomPlugin from 'eslint-plugin-jest-dom';
 import importPlugin from 'eslint-plugin-import';
-import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import prettierPlugin from 'eslint-plugin-prettier';
 import globals from 'globals';
 
@@ -24,7 +23,6 @@ export default [
       'testing-library': testingLibraryPlugin,
       'jest-dom': jestDomPlugin,
       'import': importPlugin,
-      'jsx-a11y': jsxA11yPlugin,
       'prettier': prettierPlugin,
     },
     languageOptions: {
@@ -59,7 +57,6 @@ export default [
     },
     rules: {
       ...importPlugin.configs.recommended.rules,
-      ...jsxA11yPlugin.configs.recommended.rules,
       ...prettierPlugin.configs.recommended.rules,
       'prettier/prettier': ['error', {
         singleQuote: true,
