@@ -1,0 +1,215 @@
+import eslint from '@eslint/js';
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import testingLibraryPlugin from 'eslint-plugin-testing-library';
+import jestDomPlugin from 'eslint-plugin-jest-dom';
+import globals from 'globals';
+
+export default [
+  eslint.configs.recommended,
+  {
+    ignores: ['node_modules/**', 'dist/**'],
+  },
+  {
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    plugins: {
+      '@typescript-eslint': tseslint,
+      'react': reactPlugin,
+      'react-hooks': reactHooksPlugin,
+      'testing-library': testingLibraryPlugin,
+      'jest-dom': jestDomPlugin,
+    },
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2024,
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        ...globals.jest,
+        ...globals.browser,
+      },
+    },
+    settings: {
+      'import/extensions': ['.js'],
+      'import/ignore': ['node_modules', '\\.(coffee|scss|css|less|hbs|svg|json)$'],
+      'react': {
+        pragma: 'React',
+        version: '18.2',
+      },
+    },
+    rules: {
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^(_|unused|args|[vab]$)',
+          args: 'after-used',
+          argsIgnorePattern: '^(_|unused|args|[vab]$)',
+          ignoreRestSiblings: true,
+        },
+      ],
+      'brace-style': ['warn', '1tbs', { allowSingleLine: true }],
+      'class-methods-use-this': [
+        'warn',
+        {
+          exceptMethods: [
+            'render',
+            'getInitialState',
+            'getDefaultProps',
+            'getChildContext',
+            'componentWillMount',
+            'componentDidMount',
+            'componentWillReceiveProps',
+            'shouldComponentUpdate',
+            'componentWillUpdate',
+            'componentDidUpdate',
+            'componentWillUnmount',
+          ],
+        },
+      ],
+      'comma-style': ['error', 'last'],
+      'comma-spacing': ['error', { before: false, after: true }],
+      'curly': 'error',
+      'default-case': 'warn',
+      'eqeqeq': ['error', 'always'],
+      'jsx-quotes': ['error', 'prefer-double'],
+      'keyword-spacing': ['warn', { before: true, after: true }],
+      'no-case-declarations': 'off',
+      'no-cond-assign': ['error', 'always'],
+      'no-console': ['warn', { allow: ['warn', 'error', 'log'] }],
+      'no-empty': ['error', { allowEmptyCatch: true }],
+      'no-eval': 'error',
+      'no-extra-bind': 'error',
+      'no-invalid-this': 'warn',
+      'no-labels': 'warn',
+      'no-multi-spaces': 'error',
+      'no-self-compare': 'error',
+      'no-template-curly-in-string': 'error',
+      'no-unused-expressions': ['error', { allowTernary: true }],
+      'no-useless-call': 'error',
+      'no-useless-concat': 'error',
+      'no-useless-constructor': 'error',
+      'no-var': 'error',
+      'object-shorthand': ['error', 'properties'],
+      'prefer-const': 'error',
+      'prefer-template': 'error',
+      'radix': ['error', 'always'],
+      'react/display-name': ['error', { ignoreTranspilerName: false }],
+      'react/forbid-prop-types': ['error', { forbid: ['any', 'array', 'object'] }],
+      'react/jsx-boolean-value': ['error', 'never'],
+      'react/jsx-closing-bracket-location': [
+        'error',
+        {
+          selfClosing: 'tag-aligned',
+          nonEmpty: 'tag-aligned',
+        },
+      ],
+      'react/jsx-curly-spacing': ['error', 'never', { allowMultiline: true }],
+      'react/jsx-equals-spacing': ['error', 'never'],
+      'react/jsx-first-prop-new-line': ['warn', 'multiline'],
+      'react/jsx-handler-names': [
+        'off',
+        {
+          eventHandlerPrefix: 'on',
+          eventHandlerPropPrefix: 'on',
+        },
+      ],
+      'react/jsx-indent': ['off'],
+      'react/jsx-indent-props': ['off'],
+      'react/jsx-key': 'error',
+      'react/jsx-max-props-per-line': ['off'],
+      'react/jsx-no-bind': [
+        'warn',
+        {
+          ignoreRefs: true,
+          allowArrowFunctions: true,
+          allowBind: true,
+        },
+      ],
+      'react/jsx-no-comment-textnodes': 'error',
+      'react/jsx-no-duplicate-props': ['error', { ignoreCase: false }],
+      'react/jsx-no-literals': 'off',
+      'react/jsx-no-target-blank': 'off',
+      'react/jsx-no-undef': 'warn',
+      'react/jsx-pascal-case': [
+        'warn',
+        {
+          allowAllCaps: true,
+          ignore: [],
+        },
+      ],
+      'react/jsx-sort-props': [
+        'off',
+        {
+          ignoreCase: false,
+          callbacksLast: false,
+          shorthandFirst: false,
+          shorthandLast: false,
+        },
+      ],
+      'react/jsx-tag-spacing': [
+        'warn',
+        {
+          closingSlash: 'never',
+          beforeSelfClosing: 'always',
+          afterOpening: 'never',
+        },
+      ],
+      'react/jsx-uses-react': ['warn'],
+      'react/jsx-uses-vars': 'warn',
+      'react/jsx-wrap-multilines': 'off',
+      'react/no-danger': 'off',
+      'react/no-danger-with-children': 'off',
+      'react/no-deprecated': ['warn'],
+      'react/no-did-mount-set-state': ['off'],
+      'react/no-did-update-set-state': ['off'],
+      'react/no-direct-mutation-state': 'warn',
+      'react/no-find-dom-node': 'error',
+      'react/no-is-mounted': 'error',
+      'react/no-multi-comp': ['off', { ignoreStateless: true }],
+      'react/no-render-return-value': 'warn',
+      'react/no-set-state': 'off',
+      'react/no-string-refs': 'warn',
+      'react/no-unescaped-entities': 'off',
+      'react/no-unknown-property': 'warn',
+      'react/prefer-es6-class': ['warn', 'always'],
+      'react/prefer-stateless-function': 'warn',
+      'react/prop-types': ['off', { ignore: [], customValidators: [] }],
+      'react/react-in-jsx-scope': 'error',
+      'react/require-optimization': ['off', { allowDecorators: [] }],
+      'react/require-render-return': 'error',
+      'react/self-closing-comp': 'warn',
+      'react/sort-comp': 'off',
+      'react/sort-prop-types': [
+        'off',
+        {
+          ignoreCase: false,
+          callbacksLast: false,
+          requiredFirst: false,
+        },
+      ],
+      'react-hooks/exhaustive-deps': [
+        'error',
+        {
+          additionalHooks: '(useAsync)|(useSafeEffect)|(useSafeCallback)',
+        },
+      ],
+      'react-hooks/rules-of-hooks': 'error',
+      'yoda': ['warn', 'never', { exceptRange: true }],
+    },
+  },
+  {
+    files: ['**/*.test.tsx'],
+    rules: {
+      ...testingLibraryPlugin.configs.react.rules,
+      ...jestDomPlugin.configs.recommended.rules,
+    },
+  },
+]; 
