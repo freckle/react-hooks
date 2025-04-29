@@ -1,6 +1,8 @@
 import * as React from 'react'
-import type {MaybeCleanUpFn} from './../types'
+
 import {useExtraDeps, type ExtraDeps, type PrimitiveDep} from './../use-extra-deps'
+
+import type {MaybeCleanUpFn} from './../types'
 
 export const useSafeEffect = (effect: () => MaybeCleanUpFn, deps: ReadonlyArray<PrimitiveDep>) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps

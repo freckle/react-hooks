@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import {useExtraDeps, type ExtraDeps, type PrimitiveDep} from './../use-extra-deps'
 
 export const useSafeImperativeHandle = <R>(
@@ -6,7 +7,6 @@ export const useSafeImperativeHandle = <R>(
   handle: () => R,
   deps: ReadonlyArray<PrimitiveDep>
 ) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   return useSafeImperativeHandleExtraDeps(ref, () => handle(), deps, {})
 }
 

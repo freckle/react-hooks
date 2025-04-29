@@ -1,9 +1,11 @@
+import {render} from '@testing-library/react'
 import isEqual from 'lodash/isEqual'
 import * as React from 'react'
-import {render} from '@testing-library/react'
-import {useSafeEffect, useSafeEffectExtraDeps} from '.'
-import {useSafeCallback} from './../use-safe-callback'
+
 import {CallbackFn, unsafeMkCallbackFn} from '../use-extra-deps'
+import {useSafeCallback} from './../use-safe-callback'
+
+import {useSafeEffect, useSafeEffectExtraDeps} from '.'
 
 describe('useSafeEffect', () => {
   it('works with no deps', async () => {
@@ -40,7 +42,7 @@ describe('useSafeEffect', () => {
 
   it('works with only primitive deps', async () => {
     const sideEffect = jest.fn()
-    const C = ({ p1, p2 }: { p1: number; p2: number }) => {
+    const C = ({p1, p2}: {p1: number; p2: number}) => {
       useSafeEffect(() => sideEffect(p1), [p1])
       return <>{p2}</>
     }
@@ -255,7 +257,7 @@ describe('useSafeEffect', () => {
 
   it('runs clean-up function', async () => {
     const cleanup = jest.fn()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const sideEffect = jest.fn((_v: any) => cleanup)
     const C = ({
       p1,

@@ -1,6 +1,7 @@
+import {render} from '@testing-library/react'
 import last from 'lodash/last'
 import * as React from 'react'
-import {render} from '@testing-library/react'
+
 import {useExtraDeps} from '.'
 
 describe('useExtraDeps', () => {

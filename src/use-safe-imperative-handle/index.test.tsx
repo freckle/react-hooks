@@ -1,9 +1,11 @@
+import {render} from '@testing-library/react'
 import isEqual from 'lodash/isEqual'
 import * as React from 'react'
-import {render} from '@testing-library/react'
-import {useSafeImperativeHandle, useSafeImperativeHandleExtraDeps} from '.'
-import {useSafeCallback} from './../use-safe-callback'
+
 import {CallbackFn} from '../use-extra-deps'
+import {useSafeCallback} from './../use-safe-callback'
+
+import {useSafeImperativeHandle, useSafeImperativeHandleExtraDeps} from '.'
 
 describe('useSafeImperativeHandle', () => {
   it('works with no deps', async () => {
@@ -156,8 +158,7 @@ describe('useSafeImperativeHandle', () => {
     const cb = jest.fn().mockImplementation(() => ({a: 'b'}))
     const f =
       (a: number) =>
-      (b: number): number[] =>
-        [a, b]
+      (b: number): number[] => [a, b]
 
     const A = ({p1, p2, p3}: {p1: number; p2: number; p3: number}) => {
       const cbF = useSafeCallback(() => {
