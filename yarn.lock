@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@babel/cli@^7.17.6":
+"@babel/cli@^7.17.10":
   version "7.28.3"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.28.3.tgz#f33693753bc103ab0084a5776ccf8ab8a140038b"
   integrity sha512-n1RU5vuCX0CsaqaXm9I0KUCNKNQMy5epmzl/xdSSm70bSqhg9GWhgeosypyQLc0bK24+Xpk1WGzZlI9pJtkZdg==
@@ -37,7 +37,7 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.28.0.tgz#9fc6fd58c2a6a15243cd13983224968392070790"
   integrity sha512-60X7qkglvrap8mn1lh2ebxXdZYtUcpd7gsmy9kLaBJ4i/WdY8PqTSdxyA8qraikqKQK5C1KRBKXqznrVapyNaw==
 
-"@babel/core@^7.1.0", "@babel/core@^7.12.3", "@babel/core@^7.17.9", "@babel/core@^7.7.2", "@babel/core@^7.8.0":
+"@babel/core@^7.1.0", "@babel/core@^7.12.3", "@babel/core@^7.17.12", "@babel/core@^7.7.2", "@babel/core@^7.8.0":
   version "7.28.4"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.28.4.tgz#12a550b8794452df4c8b084f95003bce1742d496"
   integrity sha512-2BCOP7TN8M+gVDj7/ht3hsaO/B/n5oDbiAyyvnRlNOs+u1o+JWNYTQrmpuNp1/Wq2gcFrI01JAW+paEKDMx/CA==
@@ -779,7 +779,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.27.1"
 
-"@babel/plugin-transform-runtime@^7.17.0":
+"@babel/plugin-transform-runtime@^7.17.12":
   version "7.28.3"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-runtime/-/plugin-transform-runtime-7.28.3.tgz#f5990a1b2d2bde950ed493915e0719841c8d0eaa"
   integrity sha512-Y6ab1kGqZ0u42Zv/4a7l0l72n9DKP/MKoKWaUSBylrhNZO2prYuqFOLbn5aW5SIFXwSH93yfjbgllL8lxuGKLg==
@@ -858,7 +858,7 @@
     "@babel/helper-create-regexp-features-plugin" "^7.27.1"
     "@babel/helper-plugin-utils" "^7.27.1"
 
-"@babel/preset-env@^7.16.11":
+"@babel/preset-env@^7.28.3":
   version "7.28.3"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.28.3.tgz#2b18d9aff9e69643789057ae4b942b1654f88187"
   integrity sha512-ROiDcM+GbYVPYBOeCR6uBXKkQpBExLl8k9HO1ygXEyds39j+vCCsjmj7S8GOniZQlEs81QlkdJZe76IpLSiqpg==
@@ -943,7 +943,7 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/preset-react@^7.16.7":
+"@babel/preset-react@^7.27.1":
   version "7.27.1"
   resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.27.1.tgz#86ea0a5ca3984663f744be2fd26cb6747c3fd0ec"
   integrity sha512-oJHWh2gLhU9dW9HHr42q0cI0/iHHXTLGe39qvpAZZzagHy0MzYLCnCVV0symeRvzmjHyVU7mw2K06E6u/JwbhA==
@@ -955,7 +955,7 @@
     "@babel/plugin-transform-react-jsx-development" "^7.27.1"
     "@babel/plugin-transform-react-pure-annotations" "^7.27.1"
 
-"@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.9":
+"@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.28.4":
   version "7.28.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.28.4.tgz#a70226016fabe25c5783b2f22d3e1c9bc5ca3326"
   integrity sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==
