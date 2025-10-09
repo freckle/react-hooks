@@ -42,7 +42,7 @@
     "@typescript-eslint/eslint-plugin": "^8.46.0",
     "@typescript-eslint/parser": "^8.46.0",
     "eslint": "^8.57.1",
-    "eslint-plugin-jest-dom": "^5.4.0",
+    "eslint-plugin-jest-dom": "^5.5.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-testing-library": "^7.0.0",
