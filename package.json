@@ -28,11 +28,11 @@
     "react": ">= 16.8.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.9",
-    "@babel/plugin-transform-runtime": "^7.17.0",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.17.12",
+    "@babel/plugin-transform-runtime": "^7.17.12",
+    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-react": "^7.27.1",
     "@testing-library/react": "^15.0.7",
     "@types/invariant": "^2.2.37",
     "@types/jest": "^27.5.2",
@@ -53,7 +53,7 @@
     "watch": "^1.0.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.17.9",
+    "@babel/runtime": "^7.28.4",
     "invariant": "^2.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
