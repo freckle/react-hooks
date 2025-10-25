@@ -32,7 +32,7 @@
     "@babel/core": "^7.28.5",
     "@babel/plugin-transform-runtime": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
-    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-react": "^7.28.5",
     "@testing-library/react": "^15.0.7",
     "@types/invariant": "^2.2.37",
     "@types/jest": "^27.5.2",
