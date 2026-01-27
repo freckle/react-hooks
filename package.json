@@ -25,7 +25,7 @@
   "author": "Freckle",
   "license": "MIT",
   "peerDependencies": {
-    "react": ">= 16.14.0"
+    "react": ">= 19.2.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.28.6",
@@ -37,14 +37,14 @@
     "@types/invariant": "^2.2.37",
     "@types/jest": "^27.5.2",
     "@types/lodash": "^4.17.23",
-    "@types/react": "^18.3.27",
-    "@types/react-dom": "^18.3.7",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.54.0",
     "@typescript-eslint/parser": "^8.54.0",
     "eslint": "^8.57.1",
     "eslint-plugin-jest-dom": "^5.5.0",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-testing-library": "^7.15.4",
     "jest": "^27.5.1",
     "prettier": "^3.8.1",
@@ -55,7 +55,7 @@
   "dependencies": {
     "@babel/runtime": "^7.28.6",
     "invariant": "^2.2.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   }
 }
