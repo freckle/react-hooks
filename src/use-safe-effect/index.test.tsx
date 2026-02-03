@@ -3,7 +3,7 @@ import * as React from 'react'
 import {render} from '@testing-library/react'
 import {useSafeEffect, useSafeEffectExtraDeps} from '.'
 import {useSafeCallback} from './../use-safe-callback'
-import {CallbackFn, unsafeMkCallbackFn} from '../use-extra-deps'
+import {CallbackFn} from '../use-extra-deps'
 
 describe('useSafeEffect', () => {
   it('works with no deps', async () => {
@@ -40,7 +40,7 @@ describe('useSafeEffect', () => {
 
   it('works with only primitive deps', async () => {
     const sideEffect = jest.fn()
-    const C = ({ p1, p2 }: { p1: number; p2: number }) => {
+    const C = ({p1, p2}: {p1: number; p2: number}) => {
       useSafeEffect(() => sideEffect(p1), [p1])
       return <>{p2}</>
     }
