@@ -6,7 +6,6 @@ export const useSafeImperativeHandle = <R>(
   handle: () => R,
   deps: ReadonlyArray<PrimitiveDep>
 ) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   return useSafeImperativeHandleExtraDeps(ref, () => handle(), deps, {})
 }
 
