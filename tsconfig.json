@@ -8,7 +8,9 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "jsx": "react",
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "src",
+    "types": ["jest", "node"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx"]
