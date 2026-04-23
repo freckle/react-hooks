@@ -71,3 +71,7 @@ export function StoreContainer(): React.Node {
   )
 }
 ```
+
+## Release
+
+See [RELEASE.md](./RELEASE.md).
