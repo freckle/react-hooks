@@ -37,7 +37,7 @@
     "@testing-library/react": "^16.3.2",
     "@types/invariant": "^2.2.37",
     "@types/jest": "^30.0.0",
-    "@types/lodash": "^4.17.24",
+    "@types/lodash": "^4.17.25",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "@typescript-eslint/eslint-plugin": "^8.65.0",
