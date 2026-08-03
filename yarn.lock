@@ -2961,7 +2961,7 @@ escape-string-regexp@^4.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
-eslint-plugin-jest-dom@^5.7.1:
+eslint-plugin-jest-dom@^5.10.1:
   version "5.10.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest-dom/-/eslint-plugin-jest-dom-5.10.1.tgz#4d37e9ef9ebdbb5b53add4e9db1f76e9c32963da"
   integrity sha512-IIJdzbACbhJUJyMAqpA9E9gxp1Gv29TeQ3DtL+pepwP8Oq2WiqjOB2HbnEIs23h0ewdKIZRDI56yLro2eUO+DA==
