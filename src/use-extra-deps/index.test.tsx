@@ -1,4 +1,3 @@
-import last from 'lodash/last'
 import * as React from 'react'
 import {render} from '@testing-library/react'
 import {useExtraDeps} from '.'
@@ -11,7 +10,7 @@ describe('useExtraDeps', () => {
         p1: {value: p1, comparator: (a, b) => a === b}
       })
       //The symbol is always the last thing in the allDeps array
-      symbol = last(allDeps)
+      symbol = allDeps[allDeps.length - 1]
       return <>{p1}</>
     }
     const {rerender} = render(<C p1={0} />)
