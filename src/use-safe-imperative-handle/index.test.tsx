@@ -1,9 +1,13 @@
-import isEqual from 'lodash/isEqual'
 import * as React from 'react'
 import {render} from '@testing-library/react'
 import {useSafeImperativeHandle, useSafeImperativeHandleExtraDeps} from '.'
 import {useSafeCallback} from './../use-safe-callback'
 import {CallbackFn} from '../use-extra-deps'
+
+// Element-wise comparison of the `Array<string>` values compared below. For an
+// array of strings this is exactly the deep comparison `lodash/isEqual` did.
+const stringArraysEqual = (a: Array<string>, b: Array<string>): boolean =>
+  a.length === b.length && a.every((x, i) => x === b[i])
 
 describe(useSafeImperativeHandle.name, () => {
   it('works with no deps', async () => {
@@ -230,7 +234,7 @@ describe(useSafeImperativeHandle.name, () => {
         {
           p1: {value: p1, comparator: (a, b) => a.text === b.text},
           // Deep comparison of arrays
-          p2: {value: p2, comparator: (a, b) => isEqual(a, b)}
+          p2: {value: p2, comparator: stringArraysEqual}
         }
       )
       return <>{p1.text}</>
