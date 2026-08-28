@@ -1,5 +1,4 @@
 /* eslint @typescript-eslint/no-explicit-any: 0 */
-import mapValues from 'lodash/mapValues'
 import * as React from 'react'
 
 // Dependencies that are safe to use in the normal `useEffect` deps array
@@ -67,6 +66,8 @@ export function useExtraDeps<T extends Record<string, unknown>>(
 
   return {
     allDeps: [...deps, run],
-    extraDepValues: mapValues(extraDeps, ({value}) => value) as T
+    extraDepValues: Object.fromEntries(
+      Object.entries(extraDeps).map(([key, {value}]) => [key, value])
+    ) as T
   }
 }
