@@ -34,7 +34,7 @@
     "@babel/preset-env": "^8.0.2",
     "@babel/preset-react": "^8.0.1",
     "@eslint/js": "^10.0.1",
-    "@testing-library/react": "^16.3.2",
+    "@testing-library/react": "^16.3.3",
     "@types/invariant": "^2.2.37",
     "@types/jest": "^30.0.0",
     "@types/lodash": "^4.17.25",
