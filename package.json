@@ -22,7 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/freckle/react-hooks.git"
   },
-  "author": "Freckle",
+  "author": "Renaissance Learning Inc",
   "license": "MIT",
   "peerDependencies": {
     "react": ">= 19.2.8"
