@@ -1,0 +1,19 @@
+# Optional native accelerators pulled in by Jest. Both ship prebuilt binaries via
+# optionalDependencies and their postinstall only selects one, so the scripts are
+# not needed. pnpm 11 fails `install` on an undeclared ignored build, so they are
+# declared here rather than left to the interactive prompt.
+allowBuilds:
+  '@parcel/watcher': false
+  unrs-resolver: false
+minimumReleaseAgeExclude:
+  - '@typescript-eslint/eslint-plugin@8.70.0'
+  - '@typescript-eslint/parser@8.70.0'
+  - '@typescript-eslint/project-service@8.70.0'
+  - '@typescript-eslint/scope-manager@8.70.0'
+  - '@typescript-eslint/tsconfig-utils@8.70.0'
+  - '@typescript-eslint/type-utils@8.70.0'
+  - '@typescript-eslint/types@8.70.0'
+  - '@typescript-eslint/typescript-estree@8.70.0'
+  - '@typescript-eslint/utils@8.70.0'
+  - '@typescript-eslint/visitor-keys@8.70.0'
+  - typescript-eslint@8.70.0

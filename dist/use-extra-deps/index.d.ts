@@ -1,7 +1,7 @@
 export type PrimitiveDep = boolean | string | number | null | void | symbol | CallbackFn<(...v: any) => any>;
 declare const __brand: unique symbol;
 export type CallbackFn<F> = F & {
-    [__brand]: "CallbackFn";
+    [__brand]: 'CallbackFn';
 };
 export declare function unsafeMkCallbackFn<F extends (...v: any) => any>(callback: F): CallbackFn<F>;
 export type ExtraDeps<V> = {

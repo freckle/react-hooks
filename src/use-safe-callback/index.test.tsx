@@ -24,7 +24,7 @@ describe('useSafeCallback', () => {
   it('works with multiple arity function', async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let f: any
-    const A = ({ p1 }: { p1: number }) => {
+    const A = ({p1}: {p1: number}) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       f = useSafeCallback(() => (_a: any, _b: any) => p1, [p1])
       return null
