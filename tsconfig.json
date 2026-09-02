@@ -1,17 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "commonjs",
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "strict": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noEmitOnError": true,
     "declaration": true,
     "jsx": "react",
     "outDir": "dist",
     "rootDir": "src",
-    "types": ["jest", "node"]
+    "types": ["jest"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
 }

@@ -1,0 +1,7 @@
+# Optional native accelerators pulled in by Jest. Both ship prebuilt binaries via
+# optionalDependencies and their postinstall only selects one, so the scripts are
+# not needed. pnpm 11 fails `install` on an undeclared ignored build, so they are
+# declared here rather than left to the interactive prompt.
+allowBuilds:
+  '@parcel/watcher': false
+  unrs-resolver: false
