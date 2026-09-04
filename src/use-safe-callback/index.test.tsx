@@ -2,7 +2,7 @@ import * as React from 'react'
 import {render} from '@testing-library/react'
 import {useSafeCallback, useSafeCallbackExtraDeps} from '.'
 
-describe('useSafeCallback', () => {
+describe(useSafeCallback.name, () => {
   it('works with dep', async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let f: any
@@ -42,7 +42,7 @@ describe('useSafeCallback', () => {
   })
 })
 
-describe('useSafeCallbackExtraDeps', () => {
+describe(useSafeCallbackExtraDeps.name, () => {
   it('works with extra deps', async () => {
     const countTrue = jest.fn((arr: Array<boolean>): number => arr.filter(x => x === true).length)
     const arr1 = [true, false, true]
