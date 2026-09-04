@@ -5,7 +5,7 @@ import {useSafeImperativeHandle, useSafeImperativeHandleExtraDeps} from '.'
 import {useSafeCallback} from './../use-safe-callback'
 import {CallbackFn} from '../use-extra-deps'
 
-describe('useSafeImperativeHandle', () => {
+describe(useSafeImperativeHandle.name, () => {
   it('works with no deps', async () => {
     const cb = jest.fn().mockImplementation(() => ({a: 'b'}))
     const ref = React.createRef<{a: string}>()
