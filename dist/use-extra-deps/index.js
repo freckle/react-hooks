@@ -32,14 +32,10 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unsafeMkCallbackFn = unsafeMkCallbackFn;
 exports.useExtraDeps = useExtraDeps;
 /* eslint @typescript-eslint/no-explicit-any: 0 */
-const mapValues_1 = __importDefault(require("lodash/mapValues"));
 const React = __importStar(require("react"));
 function unsafeMkCallbackFn(callback) {
     return callback;
@@ -78,6 +74,6 @@ function useExtraDeps(deps, extraDeps) {
     }
     return {
         allDeps: [...deps, run],
-        extraDepValues: (0, mapValues_1.default)(extraDeps, ({ value }) => value)
+        extraDepValues: Object.fromEntries(Object.entries(extraDeps).map(([key, { value }]) => [key, value]))
     };
 }
