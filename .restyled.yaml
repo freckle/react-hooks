@@ -13,3 +13,4 @@ restylers:
   - prettier:
       include:
         - 'src/**/*.ts'
+        - 'src/**/*.tsx'
