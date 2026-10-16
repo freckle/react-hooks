@@ -25,7 +25,7 @@
   "author": "Renaissance Learning Inc",
   "license": "MIT",
   "peerDependencies": {
-    "react": ">= 19.3.0"
+    "react": ">= 19.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -42,8 +42,8 @@
     "jest-environment-jsdom": "^30.5.2",
     "knip": "^6.41.0",
     "prettier": "^3.9.10",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "ts-jest": "^29.4.14",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.2"
